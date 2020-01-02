@@ -1,6 +1,6 @@
 # 介绍
 
-::: tip 提示
+:::tip 提示
 如果在阅读本文档时遇到难以理解的词汇，请随时查阅 [术语表](/glossary.md) 或使用 [Google 搜索](https://www.google.com/ncr)。
 :::
 

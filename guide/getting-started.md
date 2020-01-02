@@ -2,7 +2,7 @@
 
 CoolQ C++ SDK 使用 CMake 作为构建管理工具，使用现代 C++ 作为开发语言。对于这两者的新手来说，建议阅读本页的入门版开始教程，跳过高级版；而如果你是老手，可以直接跳到高级版开始教程。
 
-::: tip 提示
+:::tip 提示
 无论什么操作系统都可以运行开始教程，如果你正在使用 Linux 或 macOS，不用担心，可以先用你最熟悉的系统进行体验，之后再转而使用 Windows 开发或使用 AppVeyor CI 等构建 DLL。
 :::
 
@@ -100,7 +100,7 @@ git submodule update # 更新 Git 子模块
 
 Dev 模式本质上是一个模拟的私聊窗口，输入消息内容后会产生一个「假的」私聊消息事件，触发事件处理流程；而 API 调用不会真实地发送 QQ 消息，而是在命令行输出调用的函数名和参数值。
 
-::: warning 注意
+:::warning 注意
 如果 Windows 上运行 `app_dev` 出现乱码，则需要先运行命令 `chcp 65001` 将控制台代码页切换为 UTF-8。
 :::
 
@@ -110,7 +110,7 @@ Dev 模式本质上是一个模拟的私聊窗口，输入消息内容后会产�
 
 首先需要打开 酷Q 的开发模式，见 [开发模式](https://docs.cqp.im/dev/v9/devmode/)，然后将 `awesome-bot` 中的 `app.json` 和 `awesome-bot/build` 中的 `app.dll` 一同放进 酷Q 的 `dev/com.example.demo` 目录（需手动创建），此时 酷Q 目录结构为：
 
-::: vue
+:::vue
 .
 ├── app
 ├── bin
