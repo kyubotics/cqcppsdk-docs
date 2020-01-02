@@ -26,9 +26,7 @@ module.exports = {
     ],
     themeConfig: {
         logo: '/logo.png',
-        repo: 'cqmoe/cqcppsdk-docs',
-        editLinks: true,
-        editLinkText: '在 GitHub 上编辑此页',
+        repo: 'cqmoe/cqcppsdk',
         lastUpdated: '上次更新',
         nav: [
             { text: '主页', link: '/' },
