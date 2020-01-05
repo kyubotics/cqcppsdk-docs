@@ -124,10 +124,6 @@ Dev 模式本质上是一个模拟的私聊窗口，输入消息内容后会产�
 └── CQA.exe _(**或 CQP.exe**)_
 :::
 
-:::tip 提示
-这里 `com.example.demo` 是项目模板的默认 app id，由 CMake 从 `app_id.txt` 中读取，要发布应用需要修改 `app_id.txt` 中的 app id。App id 的格式见 [appid 规范](https://docs.cqp.im/dev/v9/appid/)。
-:::
-
 再重启 酷Q 或重载应用即可在应用管理中看到 demo 应用，启用即可。
 
 :::tip 提示

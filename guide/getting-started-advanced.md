@@ -44,10 +44,6 @@ cmake --build . --target app
 将构建出的 `app.dll` 和项目根目录的 `app.json` 拷贝到 酷Q 的 `dev/com.example.demo` 目录中（需手动创建），然后打开 酷Q 的开发模式（见 [开发模式](https://docs.cqp.im/dev/v9/devmode/)），再在应用管理里面启用即可。
 
 :::tip 提示
-这里 `com.example.demo` 是项目模板的默认 app id，由 CMake 从 `app_id.txt` 中读取，要发布应用需要修改 `app_id.txt` 中的 app id。App id 的格式见 [appid 规范](https://docs.cqp.im/dev/v9/appid/)。
-:::
-
-:::tip 提示
 可以修改项目模板的 `scripts/install.ps1` 中的 `$coolqRoot` 值为你的 酷Q 路径，CMake 在构建 `app.dll` 完成后会自动运行该安装脚本，将 `app.dll` 和 `app.json` 复制到 酷Q 目录中的相应位置。
 :::
 

@@ -57,6 +57,7 @@ module.exports = {
                         'third-party-libs',
                         'windows-free',
                         'packaging',
+                        'update-sdk',
                     ]
                 }
             ]
