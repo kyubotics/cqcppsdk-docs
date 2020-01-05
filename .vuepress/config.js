@@ -44,11 +44,13 @@ module.exports = {
                         'before-getting-started',
                         'getting-started',
                         'getting-started-advanced',
-                        'event',
-                        'api',
+                        'events',
+                        'lifecycle-events',
+                        'apis',
+                        'other-modules',
                         'app-json',
-                        'third-party-library',
-                        'appveyor-ci',
+                        'third-party-libs',
+                        'windows-free',
                         'packaging',
                     ]
                 }
