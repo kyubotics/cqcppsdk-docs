@@ -38,7 +38,7 @@ Dev 模式即开发模式，不依赖 Windows 和 MSVC，可在各种平台构�
 
 ```cmake
 set(CQCPPSDK_DEV_MODE ON)
-cq_add_app(${LIB_NAME}_dev ${SOURCE_FILES})
+cq_add_app(app_dev src/demo.cpp)
 ```
 
 ## Std 模式
@@ -49,7 +49,7 @@ Std 模式即标准模式，必须在 Windows 环境下使用 MSVC x86 工具集
 
 ```cmake
 set(CQCPPSDK_DEV_MODE OFF)
-cq_add_app(${LIB_NAME} ${SOURCE_FILES})
+cq_add_app(app src/demo.cpp)
 ```
 
 <!-- ## CQ 码

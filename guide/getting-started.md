@@ -110,7 +110,7 @@ Dev 模式本质上是一个模拟的私聊窗口，输入消息内容后会产�
 
 首先需要打开 酷Q 的开发模式，见 [开发模式](https://docs.cqp.im/dev/v9/devmode/)，然后将 `awesome-bot` 中的 `app.json` 和 `awesome-bot/build` 中的 `app.dll` 一同放进 酷Q 的 `dev/com.example.demo` 目录（需手动创建），此时 酷Q 目录结构为：
 
-:::vue
+:::tree
 .
 ├── app
 ├── bin

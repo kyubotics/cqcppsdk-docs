@@ -19,8 +19,8 @@ module.exports = {
     // ga: 'UA-115509121-2',
     plugins: [
         ['container', {
-            type: 'vue',
-            before: '<pre class="vue-container"><code>',
+            type: 'tree',
+            before: '<pre class="tree-container"><code>',
             after: '</code></pre>'
         }],
     ],
