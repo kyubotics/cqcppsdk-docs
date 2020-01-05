@@ -16,14 +16,18 @@ module.exports = {
         ['meta', { name: 'msapplication-TileImage', content: '/icons/mstile-150x150.png' }],
         ['meta', { name: 'msapplication-TileColor', content: '#00aba9' }]
     ],
-    ga: 'UA-115509121-3',
-    plugins: [
-        ['container', {
+    plugins: {
+        'container': {
             type: 'tree',
             before: '<pre class="tree-container"><code>',
             after: '</code></pre>'
-        }],
-    ],
+        },
+        '@vuepress/google-analytics': {
+            'ga': 'UA-115509121-3'
+        },
+        '@vuepress/back-to-top': true,
+        '@vuepress/medium-zoom': true,
+    },
     themeConfig: {
         logo: '/logo.png',
         repo: 'cqmoe/cqcppsdk',
