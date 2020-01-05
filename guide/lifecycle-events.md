@@ -14,10 +14,10 @@ on_enable([] {
 
 ## 应用生命周期
 
-### 初始时应用在启用状态
+### 初始时在启用状态
 
 ![](./assets/lifecycle-enabled-at-start.png)
 
-### 初始时应用在停用状态
+### 初始时在停用状态
 
 ![](./assets/lifecycle-disabled-at-start.png)
