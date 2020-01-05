@@ -41,9 +41,15 @@ module.exports = {
                     collapsable: false,
                     children: [
                         '',
+                        'before-getting-started',
                         'getting-started',
                         'getting-started-advanced',
-                        'whats-next',
+                        'event',
+                        'api',
+                        'app-json',
+                        'third-party-library',
+                        'appveyor-ci',
+                        'packaging',
                     ]
                 }
             ]

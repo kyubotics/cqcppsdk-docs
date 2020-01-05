@@ -1,7 +1,7 @@
 # 介绍
 
 :::tip 提示
-如果在阅读本文档时遇到难以理解的词汇，请随时查阅 [术语表](/glossary.md) 或使用 [Google 搜索](https://www.google.com/ncr)。
+如果在阅读本文档时遇到难以理解的词汇，请随时查阅 [术语表](/glossary.md)、[酷Q文库](https://docs.cqp.im/) 或 [Google 搜索](https://www.google.com/ncr)。
 :::
 
 CoolQ C++ SDK（或称 cqcppsdk、CQCPPSDK）是为了方便使用 C++ 开发 酷Q 应用而生的一个开发框架，封装了 酷Q 提供的 DLL 接口，对外提供更现代的 C++ 接口，从而提高应用开发效率，与此同时保持 C++ native 的性能优势。
