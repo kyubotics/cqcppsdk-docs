@@ -4,13 +4,19 @@ CoolQ C++ SDK 提供了一个基本的 [项目模板](https://github.com/cqmoe/c
 
 ## 使用模板
 
-直接克隆模板仓库（或者先「Use this template」再克隆你的账号下新建的仓库，这里以直接克隆为例），并初始化子模块：
+直接克隆模板仓库，或者先「Use this template」再克隆你的账号下新建的仓库，并初始化子模块：
 
 ```bash
+# 直接克隆模板仓库
 git clone https://github.com/cqmoe/cqcppsdk-template.git awesome-bot
 cd awesome-bot
 git submodule init # 初始化 Git 子模块
 git submodule update # 更新 Git 子模块
+
+# 或者，通过 use this template 从模板创建新仓库后再克隆
+git clone https://github.com/yourname/awesome-bot.git awesome-bot
+cd awesome-bot
+git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加 Git 子模块
 ```
 
 然后运行：

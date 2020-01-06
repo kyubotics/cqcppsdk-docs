@@ -46,7 +46,7 @@ Windows 上建议使用 Visual Studio 2019 生成工具。
 
 可选地将 `cqcppsdk-template-master` 改名为你想要的项目名称，如 `awesome-bot`。
 
-### 2. 直接 Git 克隆
+### 2. 直接克隆
 
 在命令行进入适当的目录，运行：
 
@@ -57,9 +57,17 @@ git submodule init # 初始化 Git 子模块
 git submodule update # 更新 Git 子模块
 ```
 
-### 3. 先创建 GitHub 仓库再克隆
+### 3. 先从模板创建仓库再克隆
 
-在 [cqmoe/cqcppsdk-template](https://github.com/cqmoe/cqcppsdk-template) 点击「Use this template」，根据提示可从项目模板创建一个新的项目，然后再按第二种方式克隆并初始化子模块。
+在 [cqmoe/cqcppsdk-template](https://github.com/cqmoe/cqcppsdk-template) 点击「Use this template」，根据提示可从项目模板创建一个新的仓库，例如 `yourname/awesome-bot`。
+
+然后在命令行进入适当目录，运行：
+
+```bash
+git clone https://github.com/yourname/awesome-bot.git awesome-bot
+cd awesome-bot
+git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加 Git 子模块
+```
 
 ## 构建
 
