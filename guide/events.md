@@ -40,32 +40,43 @@ on_group_ban([](const GroupBanEvent &e) {
 
 ## 事件类
 
-### 类型
+### 表示事件的 C++ 类
 
 前面说到的消息、通知、请求三大类分别对应 SDK 中的三个基类：`MessageEvent`、`NoticeEvent`、`RequestEvent`。每个具体的事件类都继承自这三个基类中的某个，例如 `PrivateMessageEvent` 继承自 `MessageEvent`。
 
 更多具体事件类，请在 酷Q 应用管理窗口的事件列表中查看事件名称，再对照 `core/event.h` 头文件中类定义前的注释即可了解。例如，群禁言事件对应事件类 `GroupBanEvent`。
 
+### 事件类型
+
+每个具体事件类都包含三个表示其不同层级的类型的成员变量：
+
+| 成员变量 | 类型 | 说明 |
+| --- | --- | --- |
+| `type` | `XxxEvent::Type` | 事件类型 |
+| `detail_type` | `XxxEvent::DetailType` | 事件详细类型 |
+| `sub_type` | `XxxEvent::SubType` | 事件子类型 |
+
+其中，`XxxEvent` 表示具体事件类，如 `PrivateMessageEvent`。`XxxEvent::Type` 等是枚举类型。
+
+具体事件类是以「**类型+详细类型**」为粒度区分的，而一个具体的事件可能有不同的「**子类型**」。以私聊消息事件为例，所有私聊消息事件的「**类型**」都是 `PrivateMessageEvent::Type::MESSAGE`，「**详细类型**」都是 `PrivateMessageEvent::DetailType::PRIVATE`，但从好友列表发起的私聊的「**子类型**」是 `PrivateMessageEvent::SubType::FRIEND`，而从群临时会话发起的私聊的「**子类型**」是 `PrivateMessageEvent::SubType::GROUP`。若要在代码中进行判断，可以这么写：
+
+```cpp
+if (e.sub_type == PrivateMessageEvent::SubType::GROUP) {
+    send_message(e.target, "暂时不支持群临时会话哦");
+}
+```
+
 ### 成员变量
 
 事件对象的成员变量可通过编辑器的自动补全来查看（VS Code 中会显示各成员变量的含义和类型），也可以直接前往 `core/event.h` 头文件查看。
 
-这里以 `PrivateMessageEvent` 为例介绍其成员变量，其它类可以按同样的逻辑参考头文件了解。
+这里以 `PrivateMessageEvent` 为例介绍其成员变量（这里将跳过上面已经介绍过的 `type`、`detail_type`、`sub_type`），其它类可以按同样的逻辑参考头文件了解。
 
 #### 继承自 `Event` 类的成员
 
 | 成员变量 | 类型 | 说明 |
 | --- | --- | --- |
 | `time` | `time_t` | 酷Q触发事件的时间 |
-| `type` | `std::string` | 事件类型 |
-| `detail_type` | `std::string` | 事件详细类型 |
-| `sub_type` | `std::string` | 事件子类型 |
-
-其中，三个 `type` 分别表示不同层级的类型划分，所有事件的 `type` 有 `message`、`notice`、`request` 三种，消息事件的 `detail_type` 有 `private`、`group`、`discuss` 三种，私聊消息事件的 `sub_type` 有 `friend`、`group`、`discuss`、`other` 四种。
-
-容易看出，具体事件类是以 `type`+`detail_type` 为粒度区分的，而一个具体的事件可以可能不同的 `sub_type`。
-
-这些 `type` 的可能取值，可以通过具体事件类的 `Type`、`DetailType`、`SubType` 内部类的静态成员变量获得，例如 `e.sub_type == PrivateMessageEvent::SubType::FRIEND` 判定为真表示该私聊消息的子类型是好友私聊。
 
 #### 继承自 `UserEvent` 类的成员
 
