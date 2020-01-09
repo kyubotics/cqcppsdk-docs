@@ -27,7 +27,7 @@ CQ_INIT {
         try {
             send_message(e.target, e.message);
         } catch (ApiError &e) {
-            logging::warning("私聊", "复读失败, 错误码: " + e.code);
+            logging::warning("私聊", "复读失败");
         }
     });
 }
