@@ -10,8 +10,7 @@ CoolQ C++ SDK 提供了一个基本的 [项目模板](https://github.com/cqmoe/c
 # 直接克隆模板仓库
 git clone https://github.com/cqmoe/cqcppsdk-template.git awesome-bot
 cd awesome-bot
-git submodule init # 初始化 Git 子模块
-git submodule update # 更新 Git 子模块
+git submodule update --init # 初始化 Git 子模块
 
 # 或者，通过 use this template 从模板创建新仓库后再克隆
 git clone https://github.com/yourname/awesome-bot.git awesome-bot
@@ -22,15 +21,13 @@ git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加
 然后运行：
 
 ```bash
-mkdir build # Windows 上需使用 md build
-cd build
-cmake .. # 运行 CMake generate
+cmake -B build # CMake 配置
 ```
 
 来产生工程文件，接着运行：
 
 ```bash
-cmake --build . --target app_dev
+cmake --build build --target app_dev # CMake 生成
 ```
 
 即可构建 dev 模式的可执行文件，运行 `./build/app_dev` 会进入一个交互式命令行，输入内容后会产生一个模拟的私聊消息，触发私聊消息事件处理，可进行基本的功能测试。
@@ -39,12 +36,11 @@ cmake --build . --target app_dev
 如果 Windows 上运行 `app_dev` 出现乱码，则需要先运行命令 `chcp 65001` 将控制台代码页切换为 UTF-8。
 :::
 
-若要构建能在 酷Q 开发模式运行的 `app.dll`，需在 Windows 环境下使用 Visual Studio 生成工具 x86 来构建：
+若要构建能在 酷Q 开发模式运行的 `app.dll`，需在 Windows 环境下使用 MSVC x86 来构建：
 
 ```powershell
-cd build
-cmake -G 'Visual Studio 16 2019' -A Win32 ..
-cmake --build . --target app
+cmake -B build -G 'Visual Studio 16 2019' -A Win32
+cmake --build build --target app
 ```
 
 将构建出的 `app.dll` 和项目根目录的 `app.json` 拷贝到 酷Q 的 `dev/com.example.demo` 目录中（需手动创建），然后打开 酷Q 的开发模式（见 [开发模式](https://docs.cqp.im/dev/v9/devmode/)），再在应用管理里面启用即可。

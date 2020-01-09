@@ -12,7 +12,7 @@ CoolQ C++ SDK 使用 CMake 作为构建管理工具，使用现代 C++ 作为开
 
 如果你的系统中还没有安装 CMake，请先前往 [官网](https://cmake.org/download/) 下载最新版 CMake 安装，也可使用 HomeBrew、APT、Scoop、Chocolatey 等你所熟悉的包管理器安装。
 
-通过在命令行运行：
+安装完成后，可以在命令行运行：
 
 ```bash
 cmake --version
@@ -20,17 +20,27 @@ cmake --version
 
 来检查是否安装成功。
 
+:::tip 提示
+如果你已经安装了 Visual Studio，并且勾选了「用于 Windows 的 C++ CMake 工具」，则不必再单独安装 CMake，之后直接使用 VS 打开文件夹即可。
+:::
+
 ### C++ 编译器
 
 如果你的系统中还没有安装 C++ 编译器，请先安装 GCC 9+ 或 Visual Studio 2019 生成工具等，其中 GCC 可使用各种包管理器安装，Visual Studio 2019 生成工具可在 [这里](https://visualstudio.microsoft.com/zh-hans/downloads/) 最下方「所有下载」的「Visual Studio 2019 工具」中找到，安装时需要勾选「C++ 生成工具」。
 
 Windows 上建议使用 Visual Studio 2019 生成工具。
 
-### 代码编辑器
+### 代码编辑器 / IDE
 
 建议使用 Visual Studio Code 进行开发，如果没有安装，可前往 [官网](https://code.visualstudio.com/) 下载安装，在左侧「Extensions」中可安装 Chinese (Simplified) Language Pack、C/C++、CMake、CMake Tools。
 
+如果你更习惯 Visual Studio，也可以使用它，但建议使用最新版的 VS 2019。
+
 也可以使用 CLion 进行开发，它可以自动检测系统中的工具链，可以连接远程主机，功能更丰富，但对 MSVC 编译器支持不是很好，并且是付费的。
+
+:::tip 提示
+鉴于 VS、CLion 等 IDE 已经有足够好的图形界面提示，基本上打开文件夹即可使用，下面仅以 VS Code 为例。
+:::
 
 ## 下载/克隆项目模板
 
@@ -53,8 +63,7 @@ Windows 上建议使用 Visual Studio 2019 生成工具。
 ```bash
 git clone https://github.com/cqmoe/cqcppsdk-template.git awesome-bot
 cd awesome-bot
-git submodule init # 初始化 Git 子模块
-git submodule update # 更新 Git 子模块
+git submodule update --init # 初始化 Git 子模块
 ```
 
 ### 3. 先从模板创建仓库再克隆
@@ -78,9 +87,13 @@ git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加
 选择任一工具包（Windows 上建议「Visual Studio 生成工具 2019 - x86」，其它系统建议 GCC），之后 VS Code 会开始配置 CMake，成功后会输出「Generating done」：
 
 ```log
+[cmake] turn on msvc utf-8
+[cmake] cqcppsdk dir: C:/Users/Richard/Projects/cqmoe/cqcppsdk-template/extern/cqcppsdk
 [cmake] app id: com.example.demo
-[cmake] dev mode:
+[cmake] dev mode: OFF
+[cmake] add std mode dll: app
 [cmake] dev mode: ON
+[cmake] add dev mode executable: app_dev
 [cmake] Configuring done
 [cmake] CMake Deprecation Warning:
 [cmake]   The 'cmake-server(7)' is deprecated.  Please port clients to use the
@@ -93,6 +106,10 @@ git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加
 此时 `awesome-bot` 目录下出现 `build` 目录。
 
 再在命令面板运行「CMake: 生成」命令（或在 VS Code 底部状态栏点击生成按钮 ![](./assets/vscode-build-button.png)，默认情况下将构建所有目标，对于 Visual Studio 生成工具 x86，将会构建 `app.dll` 和 `app_dev.exe`，对于其它工具包，将会构建 `app_dev`（Windows 上是 `app_dev.exe`），生成的链接库和可执行文件在 `build` 目录中。
+
+:::tip 提示
+如果你正在使用 Visual Studio 2019，直接用它打开 `awesome-bot` 文件夹，VS 将会自动进行 CMake 配置。**但需要注意，请确保开发中新建的所有代码文件都使用 UTF-8 无签名编码保存。**
+:::
 
 ## 运行
 
