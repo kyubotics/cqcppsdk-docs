@@ -152,7 +152,7 @@ Dev 模式本质上是一个模拟的私聊窗口，输入消息内容后会产�
 再重启 酷Q 或重载应用即可在应用管理中看到 demo 应用，启用即可。
 
 :::tip 提示
-可以修改项目模板的 `scripts/install.ps1` 中的 `$coolqRoot` 值为你的 酷Q 路径，CMake 在构建 `app.dll` 完成后会自动运行该安装脚本，将 `app.dll` 和 `app.json` 复制到 酷Q 目录中的相应位置。
+可以将项目模板的 `scripts/install.example.ps1` 改名为 `install.ps1`，并将 `$coolqRoot` 值改为你的 酷Q 路径，CMake 在构建 `app.dll` 完成后会自动运行该安装脚本，将 `app.dll` 和 `app.json` 复制到 酷Q 目录中的相应位置。
 :::
 
 ## 开发
