@@ -32,8 +32,8 @@ cmake --build build --target app_dev # CMake 生成
 
 即可构建 dev 模式的可执行文件，运行 `./build/app_dev` 会进入一个交互式命令行，输入内容后会产生一个模拟的私聊消息，触发私聊消息事件处理，可进行基本的功能测试。
 
-:::warning 注意
-如果 Windows 上运行 `app_dev` 出现乱码，则需要先运行命令 `chcp 65001` 将控制台代码页切换为 UTF-8。
+:::tip 提示
+Windows 上使用 Ctrl+C、Linux 和 macOS 上使用 Ctrl+D 可结束程序。
 :::
 
 若要构建能在 酷Q 开发模式运行的 `app.dll`，需在 Windows 环境下使用 MSVC x86 来构建：

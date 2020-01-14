@@ -125,13 +125,17 @@ git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加
 
 Dev 模式本质上是一个模拟的私聊窗口，输入消息内容后会产生一个「假的」私聊消息事件，触发事件处理流程；而 API 调用不会真实地发送 QQ 消息，而是在命令行输出调用的函数名和参数值。
 
-:::warning 注意
-如果 Windows 上运行 `app_dev` 出现乱码，则需要先运行命令 `chcp 65001` 将控制台代码页切换为 UTF-8。
+:::tip 提示
+Windows 上使用 Ctrl+C、Linux 和 macOS 上使用 Ctrl+D 可结束程序。
 :::
 
 ### Std 模式
 
 如果你正在 Windows 上使用 Visual Studio 生成工具 x86，则可在 酷Q 中真实地运行应用。
+
+:::tip 提示
+如果你是直接使用 VS 打开文件夹的，它默认使用 x64-Debug 配置构建，要产生 std 模式的 DLL，需要在顶部「管理配置」处新增 x86-Debug 或 x86-Release。
+:::
 
 首先需要打开 酷Q 的开发模式，见 [开发模式](https://docs.cqp.im/dev/v9/devmode/)，然后将 `awesome-bot` 中的 `app.json` 和 `awesome-bot/build` 中的 `app.dll` 一同放进 酷Q 的 `dev/com.example.demo` 目录（需手动创建），此时 酷Q 目录结构为：
 
