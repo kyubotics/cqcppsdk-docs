@@ -28,3 +28,56 @@ dir::app_per_account("log") // C:\Users\Username\Apps\酷Q Air\data\app\com.exam
 ```
 
 当上面获取的目录不存在时，将会创建。
+
+## `message` 模块
+
+用于处理消息内容。
+
+### `escape` 和 `unescape` 函数
+
+分别用于对文本进行 CQ 码转义和去转义，例如：
+
+```cpp
+message::escape("[hello,world]"); // &#91;hello&#44;world&#93;
+message::escape("[hello,world]", false); // &#91;hello,world&#93; (不转义逗号)
+message::unescape("&#91;hello,world&#93;"); // [hello,world]
+```
+
+### `MessageSegment` 类
+
+用于表示 CQ 码和纯文本（以下统称为「消息段」），提供静态成员函数来方便构造各类消息段，例如：
+
+```cpp
+using MessageSegment = message::MessageSegment;
+
+MessageSegment::text("这是一段文本，可以直接包含特殊符号如 []"); // 这是一段文本，可以直接包含特殊符号如 &#91;&#93;
+MessageSegment::face(111); // [CQ:face,id=111]
+MessageSegment::image("ABC.jpg") // [CQ:image,file=ABC.jpg]
+MessageSegment::at(12345678) // [CQ:at,qq=12345678]
+// ...
+```
+
+更多静态成员函数请参考 `core/message.h` 头文件中的类定义和注释。
+
+### `Message` 类
+
+用于表示包含一系列 CQ 码或纯文本的完整消息，本质上是消息段链表。提供 `+` 运算符重载，可以自由拼接消息，也可以利用 `std::list` 的标准接口精细地插入或删除消息段元素。
+
+示例：
+
+```cpp
+Message msg1("啦啦啦，来个表情：[CQ:face,id=111]"); // 将字符串解析为 Message 对象
+msg1 += MessageSegment::at(12345678); // 拼接一个 at 消息段
+msg1.send(e.target); // 向触发 e 事件的主体发送该消息
+
+const auto msg2 = Message(e.message); // 从消息事件的消息内容解析 Message 对象
+for (const auto &seg : msg2) { // 遍历消息段
+    if (seg == MessageSegment::at(12345678)) { // 发现 at 消息段
+        send_message(e.target, "@我干啥？");
+        break;
+    }
+}
+
+const auto msg = Message("这是一个[CQ:face,id=111]图文[CQ:image,file=123.jpg]混杂的消息");
+msg.extract_plain_text() // 提取出 "这是一个 图文 混杂的消息"
+```
