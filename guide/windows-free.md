@@ -9,7 +9,7 @@
 这里举个例子：
 
 ```cpp
-#include "cqcppsdk.h"
+#include <cqcppsdk/cqcppsdk.h>
 
 using namespace cq;
 

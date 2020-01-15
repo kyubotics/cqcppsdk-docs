@@ -4,6 +4,10 @@ sidebar: auto
 
 # 更新日志
 
+## next
+
+- 调整头文件位置，现在需要通过 `#include <cqcppsdk/cqcppsdk.h>` 引入
+
 ## v0.0.3
 
 - 新增事件回调注册函数 `on_message`、`on_notice`、`on_request`，用于注册事件大类的统一处理函数，使用方式同 `on_private_message` 等
