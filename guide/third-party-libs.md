@@ -111,8 +111,6 @@ CQ_INIT {
 }
 ```
 
-## CMake ExternalProject
-
 ## Vcpkg
 
 ## Conan
