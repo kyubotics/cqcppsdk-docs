@@ -113,7 +113,7 @@ CQ_INIT {
 
 ## Vcpkg
 
-[Vcpkg](https://github.com/microsoft/vcpkg) 是微软推出的一个 C++ 包管理器，使用它安装第三方库之后，直接在 `CMakeLists.txt` 中配置链接即可。这里以 GUI 库 [nana](https://github.com/cnjinhao/nana) 为例。
+[Vcpkg](https://github.com/microsoft/vcpkg) 是微软推出的一个 C/C++ 包管理器，使用它安装第三方库之后，直接在 `CMakeLists.txt` 中配置链接即可。这里以 GUI 库 [nana](https://github.com/cnjinhao/nana) 为例。
 
 首先安装 vcpkg：
 
@@ -205,3 +205,5 @@ VS 也可以在 `CMakeSettings.json` 中进行类似的配置，请自行搜索�
 :::
 
 ## Conan
+
+Conan 是一个与 vcpkg 类似的 C/C++ 包管理器，两者使用方式有些区别，但总体思想大同小异。由于 conan 使用起来较为简单，并且这里篇幅有限，请自行参考其 [官方文档](https://docs.conan.io/en/latest/)。
