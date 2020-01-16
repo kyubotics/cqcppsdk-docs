@@ -108,7 +108,9 @@ git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加
 再在命令面板运行「CMake: 生成」命令（或在 VS Code 底部状态栏点击生成按钮 ![](./assets/vscode-build-button.png)，默认情况下将构建所有目标，对于 Visual Studio 生成工具 x86，将会构建 `app.dll` 和 `app_dev.exe`，对于其它工具包，将会构建 `app_dev`（Windows 上是 `app_dev.exe`），生成的链接库和可执行文件在 `build` 目录中。
 
 :::tip 提示
-如果你正在使用 Visual Studio 2019，直接用它打开 `awesome-bot` 文件夹，VS 将会自动进行 CMake 配置。**但需要注意，请确保开发中新建的所有代码文件都使用 UTF-8 无签名编码保存。**
+如果你正在使用 Visual Studio 2019，直接用它打开 `awesome-bot` 文件夹，VS 将会自动进行 CMake 配置，产生的 `build` 目录在 `out` 中，点击菜单栏的「生成」-「全部生成」即可构建，产生的 `app.dll` 和 `app_dev.exe` 文件在 `out/build/<config>/` 中。
+
+需要注意，请确保开发中新建的所有代码文件都使用 UTF-8 无签名编码保存。
 :::
 
 ## 运行
@@ -134,7 +136,7 @@ Windows 上使用 Ctrl+C、Linux 和 macOS 上使用 Ctrl+D 可结束程序。
 如果你正在 Windows 上使用 Visual Studio 生成工具 x86，则可在 酷Q 中真实地运行应用。
 
 :::tip 提示
-如果你是直接使用 VS 打开文件夹的，它默认使用 x64-Debug 配置构建，要产生 std 模式的 DLL，需要在顶部「管理配置」处新增 x86-Debug 或 x86-Release。
+如果你是直接使用 VS 打开文件夹的，它默认使用 x64-Debug 配置构建，要产生 std 模式的 DLL，需要在顶部工具栏配置下拉框中选择 x86-Debug 或 x86-Release（可能需要手动添加）。
 :::
 
 首先需要打开 酷Q 的开发模式，见 [开发模式](https://docs.cqp.im/dev/v9/devmode/)，然后将 `awesome-bot` 中的 `app.json` 和 `awesome-bot/build` 中的 `app.dll` 一同放进 酷Q 的 `dev/com.example.demo` 目录（需手动创建），此时 酷Q 目录结构为：

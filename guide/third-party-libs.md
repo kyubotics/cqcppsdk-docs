@@ -189,4 +189,19 @@ cmake -B build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake"
 cmake --build build --target app
 ```
 
+:::tip 提示
+要在 VS Code 中使用 CMake Tools 配置，可添加工作区设置如下：
+
+```json
+{
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "${workspaceRoot}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_TARGET_TRIPLET": "x86-windows-static"
+    }
+}
+```
+
+VS 也可以在 `CMakeSettings.json` 中进行类似的配置，请自行搜索。
+:::
+
 ## Conan
