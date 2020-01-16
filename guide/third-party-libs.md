@@ -1,6 +1,6 @@
 # 使用第三方库
 
-有多种方式在本 SDK 中使用第三方库，总结起来有两种，一种是手动修改 `CMakeLists.txt` 使构建应用时同时构建第三方库，然后链接；另一种是通过包管理器预先编译好并安装在特定位置，然后在应用中直接包含头文件并链接。
+有多种方式在本 SDK 中使用第三方库，总结起来有两种，一种是手动修改 `CMakeLists.txt` 使构建应用时同时构建第三方库，然后链接；另一种是通过包管理器预先编译好并安装在特定位置，然后在应用中直接包含头文件并链接。以下对这两种方案分别介绍两个具体方式。
 
 ## 直接导入库代码
 
@@ -112,5 +112,81 @@ CQ_INIT {
 ```
 
 ## Vcpkg
+
+[Vcpkg](https://github.com/microsoft/vcpkg) 是微软推出的一个 C++ 包管理器，使用它安装第三方库之后，直接在 `CMakeLists.txt` 中配置链接即可。这里以 GUI 库 [nana](https://github.com/cnjinhao/nana) 为例。
+
+首先安装 vcpkg：
+
+```bash
+# 克隆仓库
+git clone https://github.com/Microsoft/vcpkg.git
+cd vcpkg
+
+# 初始化
+./bootstrap-vcpkg.bat # Windows
+./bootstrap-vcpkg.sh # Linux
+```
+
+:::tip 提示
+理论上 vcpkg 可以安装在任何地方，但因为各项目所依赖的第三方库及其版本可能不同，全局使用一个 vcpkg 实例可能容易造成混乱，建议每个项目对应一个 vcpkg 实例。这里将把 vcpkg 安装在项目目录中，也就是 `awesome-bot/vcpkg`。
+:::
+
+`bootstrap-vcpkg` 脚本将会构建出可执行文件 `vcpkg` 或 `vcpkg.exe`。此时可运行：
+
+```bash
+./vcpkg
+```
+
+来检查安装是否成功。
+
+由于 vcpkg 对不同系统、平台和链接方式，需要使用不同的 triplet（vcpkg 中定义安装配置的文件），以下只介绍 Windows 上 x86 编译、静态链接的情况。
+
+首先在安装第三方库之前，需要将 `vcpkg/triplets/x86-windows-static.cmake` 中的 `set(VCPKG_CRT_LINKAGE static)` 改为 `set(VCPKG_CRT_LINKAGE dynamic)`，最终该文件内容如下：
+
+```cmake
+set(VCPKG_TARGET_ARCHITECTURE x86)
+set(VCPKG_CRT_LINKAGE dynamic)
+set(VCPKG_LIBRARY_LINKAGE static)
+```
+
+这将会使 vcpkg 在构建第三方库时使用静态库链接、动态 CRT 链接，从而与你的 酷Q 应用保持一致，以便链接成功。如果你想使用静态 CRT 链接，则超出了本文档的讨论范围，请自行修改 `CMakeLists.txt`。
+
+接着安装 nana 库：
+
+```bash
+./vcpkg install nana:x86-windows-static
+```
+
+成功后 `vcpkg/installed/x86-windows-static/lib` 中应有 `nana.lib` 等静态库文件。然后再修改 `CMakeLists.txt` 中 `cq_add_app` 调用附近的代码形如：
+
+```cmake
+find_package(unofficial-nana CONFIG REQUIRED)
+
+cq_add_app(${LIB_NAME} ${SOURCE_FILES}) # 添加 std 模式的动态链接库构建目标
+target_link_libraries(${LIB_NAME} PRIVATE unofficial::nana::nana)
+```
+
+之后便可在代码中使用：
+
+```cpp
+#include <cqcppsdk/cqcppsdk.h>
+#include <nana/gui.hpp>
+
+CQ_INIT {
+}
+
+CQ_MENU(menu_demo_1) {
+    nana::msgbox msg{"标题"};
+    msg << "你点击了菜单";
+    msg.show();
+}
+```
+
+最后，使用 CMake 构建时，需要指定 `CMAKE_TOOLCHAIN_FILE` 和 `VCPKG_TARGET_TRIPLET`：
+
+```bash
+cmake -B build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x86-windows-static" -A Win32
+cmake --build build --target app
+```
 
 ## Conan
