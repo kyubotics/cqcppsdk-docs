@@ -4,6 +4,10 @@ sidebar: auto
 
 # 更新日志
 
+## v0.1.1
+
+- 修改 `send_message` 接口，现不再默认@用户，仍可通过第三个参数 `at_user`（传入 `true`）使它@
+
 ## v0.1.0
 
 - 调整头文件位置，现在需要通过 `#include <cqcppsdk/cqcppsdk.h>` 引入
