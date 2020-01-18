@@ -101,3 +101,16 @@ if (e.sub_type == PrivateMessageEvent::SubType::GROUP) {
 | 成员变量 | 类型 | 说明 |
 | --- | --- | --- |
 | `user_id` | `int64_t` | 用户 Id（QQ 号） |
+
+### 成员函数
+
+所有事件类都从 `UserEvent` 基类继承了 `block` 和 `blocked` 成员函数，分别用于阻止事件传递给下一个应用和检查事件是否已被阻止继续传递，用法如下：
+
+```cpp
+auto handled = false;
+
+// ...
+
+if (handled) e.block(); // 事件已经处理好，不必再给下一个应用处理
+assert(e.blocked() == true);
+```
