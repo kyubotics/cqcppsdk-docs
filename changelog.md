@@ -4,7 +4,7 @@ sidebar: auto
 
 # 更新日志
 
-## next
+## v0.1.0
 
 - 调整头文件位置，现在需要通过 `#include <cqcppsdk/cqcppsdk.h>` 引入
 - 新增请求事件标识的包装类 `RequestEvent::Flag`，`RequestEvent` 的 `flag` 成员变量改为该类型，同时 `set_friend_request` 和 `set_group_request` 接口的第一个参数改为 `const RequestEvent::Flag &flag`，减少传参出错的可能
