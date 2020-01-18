@@ -7,6 +7,11 @@ sidebar: auto
 ## next
 
 - 调整头文件位置，现在需要通过 `#include <cqcppsdk/cqcppsdk.h>` 引入
+- 新增请求事件标识的包装类 `RequestEvent::Flag`，`RequestEvent` 的 `flag` 成员变量改为该类型，同时 `set_friend_request` 和 `set_group_request` 接口的第一个参数改为 `const RequestEvent::Flag &flag`，减少传参出错的可能
+- 修改 `set_group_anonymous_ban` 接口的第二个参数，从 `const std::string &anonymous_flag` 改为 `const Anonymous &anonymous`，更好地隐藏实现细节
+- 修改各事件类的 `Type`、`DetailType`、`SubType`、`Operation` 等为 `enum class` 类型，解决名字重复重复问题，并提高类型安全性
+- 减少不必要的拷贝，提高运行效率
+- 修复一些小错误
 
 ## v0.0.3
 
