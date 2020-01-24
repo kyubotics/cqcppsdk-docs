@@ -81,3 +81,28 @@ for (const auto &seg : msg2) { // 遍历消息段
 const auto msg = Message("这是一个[CQ:face,id=111]图文[CQ:image,file=123.jpg]混杂的消息");
 msg.extract_plain_text() // 提取出 "这是一个 图文 混杂的消息"
 ```
+
+## `utils` 模块
+
+### 字符串相关
+
+使用本 SDK 要求全程使用 UTF-8 编码的字符串，但在进行文件操作、使用 Windows API 等时，常常需要使用 ANSI 编码（Windows 上一种随所保存的文本内容而切换具体编码方式的编码）、宽字符串（`std::wstring`）或 C 风格的宽字符串（`const wchar_t *`）。
+
+现在可以使用 `utils` 模块中的 `s2ws`、`ws2s` 函数来在宽字符串和 UTF-8 编码的字符串之间转换，例如：
+
+```cpp
+#include <cqcppsdk/cqcppsdk.h>
+#include <cqcppsdk/utils/string.h>
+#include <fstream>
+#include <iostream>
+
+using cq::utils::s2ws;
+using cq::utils::ws2s;
+
+CQ_INIT {
+    cq::on_enable([] {
+        std::ofstream out(s2ws("日志.txt"));
+        out << "应用已启用" << std::endl;
+    });
+}
+```

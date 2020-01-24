@@ -4,6 +4,10 @@ sidebar: auto
 
 # 更新日志
 
+## v0.1.2
+
+- 引入字符串相关工具函数 `utils::s2ws` 和 `utils::ws2s` 等，需 `#include <cqcppsdk/utils/string.h>`
+
 ## v0.1.1
 
 - 修改 `send_message` 接口，现不再默认@用户，仍可通过第三个参数 `at_user`（传入 `true`）使它@
