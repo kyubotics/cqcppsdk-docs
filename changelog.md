@@ -4,6 +4,11 @@ sidebar: auto
 
 # 更新日志
 
+## v0.1.3
+
+- 修复没有使用 `CQ_INIT` 宏的情况下，编译出的程序无法启动的 bug
+- 修复 CMake 函数 `cq_add_app` 不能处理列表参数的 bug，此 bug 会导致 `cq_add_app(app ${SOURCE_FILES})` 只会传入 `${SOURCE_FILES}` 中的第一项，如果此前你使用字符串传递了参数，如 `cq_add_app(app "a.cpp b.cpp")`，应当改为 `cq_add_app(app a.cpp b.cpp)`，类似内置的 `add_executable`
+
 ## v0.1.2
 
 - 引入字符串相关工具函数 `utils::s2ws` 和 `utils::ws2s` 等，需 `#include <cqcppsdk/utils/string.h>`
