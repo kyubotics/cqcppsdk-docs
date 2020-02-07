@@ -70,7 +70,7 @@ if (e.sub_type == PrivateMessageEvent::SubType::GROUP) {
 
 事件对象的成员变量可通过编辑器的自动补全来查看（VS Code 中会显示各成员变量的含义和类型），也可以直接前往 `core/event.h` 头文件查看。
 
-这里以 `PrivateMessageEvent` 为例介绍其成员变量（这里将跳过上面已经介绍过的 `type`、`detail_type`、`sub_type`），其它类可以按同样的逻辑参考头文件了解。
+这里以 `GroupMessageEvent`（群聊消息事件）为例介绍其成员变量（这里将跳过上面已经介绍过的 `type`、`detail_type`、`sub_type`），其它类可以按同样的逻辑参考头文件了解。
 
 #### 继承自 `Event` 类的成员
 
@@ -82,25 +82,24 @@ if (e.sub_type == PrivateMessageEvent::SubType::GROUP) {
 
 | 成员变量 | 类型 | 说明 |
 | --- | --- | --- |
+| `user_id` | `int64_t` | 触发事件的用户 ID（QQ 号） |
 | `target` | `Target` | 触发事件的主体 |
 
-触发事件的主体是指某用户、或某群的某用户等，可用于发送回复时指定目标。例如，`send_message(e.target, "你好")` API 调用可向触发事件的主体发送「你好」。
+「触发事件的主体」是指某用户、或某群的某用户等，它和触发事件的用户 ID 的区别在于，它会额外保存群 ID 或讨论组 ID（如果有的话）。「触发事件的主体」可用于发送回复时指定目标，例如，`send_message(e.target, "你好")` API 调用可向触发事件的主体发送「你好」，如果该主体是来自一个群，则消息是发送到群中的。
 
 #### 继承自 `MessageEvent` 类的成员
 
 | 成员变量 | 类型 | 说明 |
 | --- | --- | --- |
-| `message_id` | `int32_t` | 消息 Id |
+| `message_id` | `int32_t` | 消息 ID |
 | `message` | `std::string` | 消息内容 |
 | `font` | `int32_t` | 字体, 此属性已经没有实际意义 |
-
-对于群消息而言，消息 Id 可用于撤回消息。
 
 #### 继承自 mixin 类的成员
 
 | 成员变量 | 类型 | 说明 |
 | --- | --- | --- |
-| `user_id` | `int64_t` | 用户 Id（QQ 号） |
+| `group_id` | `int64_t` | 群 ID（群号） |
 
 ### 成员函数
 

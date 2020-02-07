@@ -4,6 +4,12 @@ sidebar: auto
 
 # 更新日志
 
+## master
+
+- `logging` 模块现确保不抛出异常，如果日志失败，将忽略（`add_log` 仍可能抛异常）
+- 修复 GCC 8.x 兼容性问题
+- 将 `user_id` 属性从具体类移动到 `UserEvent`（不影响现有代码）
+
 ## v0.1.3
 
 - 修复没有使用 `CQ_INIT` 宏的情况下，编译出的程序无法启动的 bug
