@@ -6,6 +6,7 @@ sidebar: auto
 
 ## master
 
+- `Target` 类新增 `is_private`、`is_group`、`is_discuss` 方法，分别用于判断主体是来自私聊（私人通知等）、群聊（群通知等）还是讨论组
 - `logging` 模块现确保不抛出异常，如果日志失败，将忽略（`add_log` 仍可能抛异常）
 - 修复 GCC 8.x 兼容性问题
 - 将 `user_id` 属性从具体类移动到 `UserEvent`（不影响现有代码）
