@@ -30,7 +30,7 @@ on_private_message([](const auto &e) {
 });
 ```
 
-更多 `on_*` 函数，可以在 酷Q 应用管理窗口的事件列表中查看事件名称，然后去 `core/events.inc` 文件中找到对应的 `DEF_EVENT` 宏调用，使用 `on_` 前缀加上该宏调用的第一个参数即可。例如，群禁言事件对应的 `DEF_EVENT` 宏调用为 `DEF_EVENT(group_ban, const GroupBanEvent &)`，则该事件对应的注册函数即为 `on_group_ban`，注册事件处理函数的代码为：
+更多 `on_*` 函数，可以在 酷Q 应用管理窗口的事件列表中查看事件名称，然后去 `core/event_callback.h` 文件中找到对应的 `DEF_EVENT` 宏调用，使用 `on_` 前缀加上该宏调用的第一个参数即可。例如，群禁言事件对应的 `DEF_EVENT` 宏调用为 `DEF_EVENT(group_ban, const GroupBanEvent &)`，则该事件对应的注册函数即为 `on_group_ban`，注册事件处理函数的代码为：
 
 ```cpp
 on_group_ban([](const GroupBanEvent &e) {

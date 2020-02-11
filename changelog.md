@@ -4,12 +4,35 @@ sidebar: auto
 
 # 更新日志
 
-## master
+## v0.2.0
+
+### 💡 新增特性
 
 - `Target` 类新增 `is_private`、`is_group`、`is_discuss` 方法，分别用于判断主体是来自私聊（私人通知等）、群聊（群通知等）还是讨论组
-- `logging` 模块现确保不抛出异常，如果日志失败，将忽略（`add_log` 仍可能抛异常）
+  ```cpp
+  if (e.target.is_group()) {
+      // 当前事件是群消息、群通知或群请求
+      const auto group_id = e.target.group_id.value();
+  }
+  ```
+- `dir` 模块的 `root`、`app`、`app_per_account` 函数现支持任意数量的参数，用于拼接路径，其中 `root` 不会自动创建不存在的目录，而后两者会自动创建
+  ```cpp
+  dir::root("data", "image"); // -> "C:\\path\\to\\coolq\\data\\image\\"
+  ```
+- 新增了一套新的事件处理接口，见 [Dolores](/dolores/)
+
+### 🔨 行为变更
+
+- `cqcppsdk/cqcppsdk.h` 现包含 `cqcppsdk/utils/string.h`，可直接使用 `utils::s2ws` 等函数
+- `logging` 模块现确保不抛出异常，如果日志失败，将忽略（`add_log` 仍会抛出异常）
+- 事件处理函数抛出的所有继承自 `std::exception` 的异常现在会被捕获，并打印日志，不用再担心调用 API 时忘记 try catch 导致程序崩溃（事件处理函数活跃期之外调用 API 仍然应当妥善处理异常）
+- `user_id` 属性现已从具体类移动到 `UserEvent`（不影响现有代码）
+
+### 🐛 Bug 修复和细节优化
+
+- 修复 dev 模式中，打印 API 调用信息时参数名错误的 bug
 - 修复 GCC 8.x 兼容性问题
-- 将 `user_id` 属性从具体类移动到 `UserEvent`（不影响现有代码）
+- 修复潜在的未定义行为
 
 ## v0.1.3
 

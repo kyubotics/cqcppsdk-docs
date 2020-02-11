@@ -27,6 +27,7 @@ module.exports = {
         nav: [
             { text: '主页', link: '/' },
             { text: '指南', link: '/guide/' },
+            { text: 'Dolores', link: '/dolores/' },
             { text: '术语表', link: '/glossary.html' },
             { text: '更新日志', link: '/changelog.html' },
         ],
@@ -52,7 +53,16 @@ module.exports = {
                         'update-sdk',
                     ]
                 }
-            ]
+            ],
+            '/dolores/': [
+                {
+                    title: 'Dolores',
+                    collapsable: false,
+                    children: [
+                        '',
+                    ]
+                }
+            ],
         },
     }
 }
