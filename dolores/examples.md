@@ -55,7 +55,7 @@ dolores_on_message(ban_dirty_words, group(), unblocked(),
 }
 ```
 
-本例展示了进入条件可以有多个，通过逗号隔开，其效果相当于使用 `&` 运算，例如例中的条件相当于：
+本例展示了进入条件可以有多个，通过逗号隔开，其效果相当于使用 `&` 运算，因此例中的条件相当于：
 
 ```cpp
 group() & unblocked() & (contains("脏话1") | contains("脏话2") | contains("脏话3"))
