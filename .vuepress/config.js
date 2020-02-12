@@ -24,6 +24,9 @@ module.exports = {
         logo: '/logo.png',
         repo: 'cqmoe/cqcppsdk',
         lastUpdated: '上次更新',
+        docsRepo: 'cqmoe/cqcppsdk-docs',
+        editLinks: true,
+        editLinkText: '帮助我们改善此页面',
         nav: [
             { text: '主页', link: '/' },
             { text: '指南', link: '/guide/' },
@@ -56,10 +59,22 @@ module.exports = {
             ],
             '/dolores/': [
                 {
-                    title: 'Dolores',
+                    title: '基本',
                     collapsable: false,
                     children: [
                         '',
+                        'getting-started',
+                        'examples',
+                        'sessions',
+                        'lifecycle',
+                    ]
+                },
+                {
+                    title: '条件',
+                    collapsable: false,
+                    children: [
+                        'builtin-conditions',
+                        'custom-conditions',
                     ]
                 }
             ],

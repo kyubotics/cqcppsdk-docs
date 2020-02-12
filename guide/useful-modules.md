@@ -15,19 +15,22 @@ logging::error("标签", "Error 日志"); // 会导致 酷Q 弹出错误气泡
 logging::fatal("标签", "Fatal 日志"); // 会导致 酷Q 弹出错误窗口，确定后退出
 ```
 
+该模块的函数保证不抛出异常，如果日志失败，将会忽略。
+
 ## `dir` 模块
 
 用于获取 酷Q 主目录、应用目录、应用子目录、每个账号独立的应用子目录等（结尾总是包含 `\`）。例如：
 
 ```cpp
-dir::root() // C:\Users\Username\Apps\酷Q Air\
-dir::app() // C:\Users\Username\Apps\酷Q Air\data\app\com.example.demo\
-dir::app("log") // C:\Users\Username\Apps\酷Q Air\data\app\com.example.demo\log\
-dir::app_per_account() // C:\Users\Username\Apps\酷Q Air\data\app\com.example.demo\12345678\
-dir::app_per_account("log") // C:\Users\Username\Apps\酷Q Air\data\app\com.example.demo\12345678\log\
+dir::root(); // C:\Users\Username\Apps\酷Q Air\
+dir::root("data", "image"); // C:\Users\Username\Apps\酷Q Air\data\image\
+dir::app(); // C:\Users\Username\Apps\酷Q Air\data\app\com.example.demo\
+dir::app("log"); // C:\Users\Username\Apps\酷Q Air\data\app\com.example.demo\log\
+dir::app_per_account(); // C:\Users\Username\Apps\酷Q Air\data\app\com.example.demo\12345678\
+dir::app_per_account("log"); // C:\Users\Username\Apps\酷Q Air\data\app\com.example.demo\12345678\log\
 ```
 
-当上面获取的目录不存在时，将会创建。
+当获取的目录不存在时，`dir::root` 不会自动创建，而其它函数会自动创建。
 
 ## `message` 模块
 
