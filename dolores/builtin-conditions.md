@@ -63,7 +63,7 @@
 - **用于**：消息事件
 - **示例**：
   ```cpp
-  startswith("suffix")
+  endswith("suffix")
   ```
 
 ## `contains` 要求消息包含特定字符串
