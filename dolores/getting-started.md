@@ -29,15 +29,15 @@ Dolores 提供了三个宏：`dolores_on_message`、`dolores_on_notice`、`dolor
 
 #include <dolores/dolores.hpp>
 
-using namespace dolores::cond;
+using namespace dolores::matchers;
 
-dolores_on_message(hello, contains("你好")) {
-    session.send("你也好");
+dolores_on_message(contains("你好")) {
+    current.send("你也好");
 }
 ```
 
 :::tip 提示
-上面的 `contains` 是 `dolores::cond` 命名空间中的类，由于文档中需大量使用此命名空间的类和对象，后面将默认已经 `using namespace dolores::cond`。
+上面的 `contains` 是 `dolores::matchers` 命名空间中的类，由于文档中需大量使用此命名空间的类和对象，后面将默认已经 `using namespace dolores::matchers`。
 :::
 
 按照 [指南](/guide/) 中所介绍的，构建并运行，可以得到如下效果：

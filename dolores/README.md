@@ -15,9 +15,9 @@ Dolores 是在 SDK 的基本接口之上再次抽象封装的一层接口。它�
 ```cpp
 #include <dolores/dolores.hpp>
 
-using namespace dolores::cond;
+using namespace dolores::matchers;
 
-dolores_on_message(echo, command("echo")) {
-    session.send(session.command_argument());
+dolores_on_message(command("echo")) {
+    current.send(current.command_argument());
 }
 ```
