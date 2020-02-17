@@ -78,10 +78,10 @@ dolores_on_message(group(), unblocked(),
 }
 ```
 
-本例展示了 Matcher 可以有多个，通过逗号隔开，其效果相当于使用 `&&` 运算，因此例中的进入条件相当于：
+本例展示了 Matcher 可以有多个，通过逗号隔开，其效果相当于使用 `all` Matcher，因此例中的进入条件相当于：
 
 ```cpp
-group() && unblocked() && (contains("脏话1") || contains("脏话2") || contains("脏话3"))
+all(group(), unblocked(), (contains("脏话1") || contains("脏话2") || contains("脏话3")))
 ```
 
 `group` 要求消息必须是群消息；`unblocked` 要求事件没有被阻止传递（如果在判断此 Matcher 之前，已经有处理程序运行过，且调用了 `event.block()`，则 `unblocked` 不满足）。
