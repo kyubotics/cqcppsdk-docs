@@ -7,6 +7,7 @@ sidebar: auto
 ## master
 
 - 新增 `cq::to_string` 函数，在 `cqcppsdk/utils/string.h`，不再提供扩展的 `std::to_string` 重载
+- 支持使用 MinGW 构建 std 模式的 `app.dll`
 - 大幅调整了 Dolores 接口，在名词含义上，原来的「会话」（Session）改为「Current」，「状态」（State）改为「Session」，「条件」（Condition）改为「Matcher」，其它变更请参考最新文档
 
 ## v0.2.1
