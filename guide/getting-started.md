@@ -36,10 +36,10 @@ Windows 上建议使用 Visual Studio 2019 生成工具。
 
 如果你更习惯 Visual Studio，也可以使用它，但建议使用最新版的 VS 2019。
 
-也可以使用 CLion 进行开发，它可以自动检测系统中的工具链，可以连接远程主机，功能更丰富，但对 MSVC 编译器支持不是很好，并且是付费的。
+也可以使用 CLion 进行开发，它可以自动检测系统中的工具链，可以连接远程主机，功能更丰富，但它是付费的（通过学生身份可以免费申请许可证）。
 
 :::tip 提示
-鉴于 VS、CLion 等 IDE 已经有足够好的图形界面提示，基本上打开文件夹即可使用，下面仅以 VS Code 为例。
+鉴于 VS、CLion 等 IDE 已经有足够好的图形界面提示，网上的教程也非常丰富，下面仅以 VS Code 为例。
 :::
 
 ## 下载/克隆项目模板
@@ -87,30 +87,26 @@ git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加
 选择任一工具包（Windows 上建议「Visual Studio 生成工具 2019 - x86」，其它系统建议 GCC），之后 VS Code 会开始配置 CMake，成功后会输出「Generating done」：
 
 ```log
-[cmake] turn on msvc utf-8
-[cmake] cqcppsdk dir: C:/Users/Richard/Projects/cqmoe/cqcppsdk-template/extern/cqcppsdk
-[cmake] app id: com.example.demo
-[cmake] dev mode: OFF
-[cmake] add std mode dll: app
-[cmake] dev mode: ON
-[cmake] add dev mode executable: app_dev
-[cmake] Configuring done
-[cmake] CMake Deprecation Warning:
-[cmake]   The 'cmake-server(7)' is deprecated.  Please port clients to use the
-[cmake]   'cmake-file-api(7)' instead.
-[cmake]
-[cmake]
-[cmake] Generating done
+[cmake] -- turn on msvc utf-8
+[cmake] -- cqcppsdk dir: C:/Users/Richard/Projects/cqmoe/cqcppsdk-template/extern/cqcppsdk
+[cmake] -- app id: com.example.demo
+[cmake] -- dev mode: OFF
+[cmake] -- add std mode dll: app
+[cmake] -- install destination: dev/com.example.demo
+[cmake] -- dev mode: ON
+[cmake] -- add dev mode executable: app_dev
+[cmake] -- Configuring done
+[cmake] -- Generating done
 ```
 
 此时 `awesome-bot` 目录下出现 `build` 目录。
 
-再在命令面板运行「CMake: 生成」命令（或在 VS Code 底部状态栏点击生成按钮 ![](./assets/vscode-build-button.png)，默认情况下将构建所有目标，对于 Visual Studio 生成工具 x86，将会构建 `app.dll` 和 `app_dev.exe`，对于其它工具包，将会构建 `app_dev`（Windows 上是 `app_dev.exe`），生成的链接库和可执行文件在 `build` 目录中。
+再在命令面板运行「CMake: 生成」命令（或在 VS Code 底部状态栏点击生成按钮 ![](./assets/vscode-build-button.png)，默认情况下将构建所有目标，对于 Visual Studio 生成工具 x86 或 MinGW w64 i686，将会构建 `app.dll` 和 `app_dev.exe`，对于其它工具包，将会构建 `app_dev`（Windows 上是 `app_dev.exe`），生成的链接库和可执行文件在 `build` 目录中。
 
 :::tip 提示
 如果你正在使用 Visual Studio 2019，直接用它打开 `awesome-bot` 文件夹，VS 将会自动进行 CMake 配置，产生的 `build` 目录在 `out` 中，点击菜单栏的「生成」-「全部生成」即可构建，产生的 `app.dll` 和 `app_dev.exe` 文件在 `out/build/<config>/` 中。
 
-需要注意，请确保开发中新建的所有代码文件都使用 UTF-8 无签名编码保存。
+需要注意，请确保开发中新建的所有代码文件都使用 UTF-8 无签名编码保存（已通过 `.editorconfig` 配置 VS 的默认编码）。
 :::
 
 ## 运行
@@ -133,7 +129,7 @@ Windows 上使用 Ctrl+C、Linux 和 macOS 上使用 Ctrl+D 可结束程序。
 
 ### Std 模式
 
-如果你正在 Windows 上使用 Visual Studio 生成工具 x86，则可在 酷Q 中真实地运行应用。
+如果你正在 Windows 上使用 Visual Studio 生成工具 x86 或 MinGW w64 i686，则可在 酷Q 中真实地运行应用。
 
 :::tip 提示
 如果你是直接使用 VS 打开文件夹的，它默认使用 x64-Debug 配置构建，要产生 std 模式的 DLL，需要在顶部工具栏配置下拉框中选择 x86-Debug 或 x86-Release（可能需要手动添加）。
@@ -158,7 +154,7 @@ Windows 上使用 Ctrl+C、Linux 和 macOS 上使用 Ctrl+D 可结束程序。
 再重启 酷Q 或重载应用即可在应用管理中看到 demo 应用，启用即可。
 
 :::tip 提示
-可以将项目模板的 `scripts/install.example.ps1` 改名为 `install.ps1`，并将 `$coolqRoot` 值改为你的 酷Q 路径，CMake 在构建 `app.dll` 完成后会自动运行该安装脚本，将 `app.dll` 和 `app.json` 复制到 酷Q 目录中的相应位置。
+可修改 `CMakeLists.txt` 中的 `cq_install_std_app()` 为 `cq_install_std_app("C:/Path/To/酷Q")`，然后通过构建 CMake 的 `install` 目标即可自动安装 `app.dll` 和 `app.json`
 :::
 
 ## 开发

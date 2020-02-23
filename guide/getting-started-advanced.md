@@ -43,10 +43,14 @@ cmake -B build -G 'Visual Studio 16 2019' -A Win32
 cmake --build build --target app
 ```
 
+:::tip 提示
+也可使用 MinGW 构建，这里不再给出命令示例。
+:::
+
 将构建出的 `app.dll` 和项目根目录的 `app.json` 拷贝到 酷Q 的 `dev/com.example.demo` 目录中（需手动创建），然后打开 酷Q 的开发模式（见 [开发模式](https://docs.cqp.im/dev/v9/devmode/)），再在应用管理里面启用即可。
 
 :::tip 提示
-可以将项目模板的 `scripts/install.example.ps1` 改名为 `install.ps1`，并将 `$coolqRoot` 值改为你的 酷Q 路径，CMake 在构建 `app.dll` 完成后会自动运行该安装脚本，将 `app.dll` 和 `app.json` 复制到 酷Q 目录中的相应位置。
+可以使用 CMake 的 `install` 目标来自动安装 `app.dll` 和 `app.json`，需要配置 `CMAKE_INSTALL_PREFIX` 为 酷Q 主目录，或修改 `CMakeLists.txt` 中的 `cq_install_std_app()` 为 `cq_install_std_app("C:/Path/To/酷Q")`（`cq_install_std_app` 可以有多个参数，从而指定多个安装位置）
 :::
 
 ## 手动配置
@@ -79,13 +83,13 @@ include(extern/cqcppsdk/cqcppsdk.cmake) # 包含 SDK 的 CMake 脚本
 
 cq_set_app_id("com.your-company.awesome-bot") # 设置 app id, 见酷Q文档
 
-if(MSVC AND (CMAKE_SIZEOF_VOID_P EQUAL 4)) # MSVC x86
-    cq_add_app(app src/app.cpp) # 添加 std 模式的动态链接库构建目标
-endif()
+if (CQ_CAN_BUILD_STD_MODE)
+    cq_add_std_app(src/app.cpp) # 添加 std 模式的动态链接库构建目标
+    cq_install_std_app() # 向 CMAKE_INSTALL_PREFIX 指定的 酷Q 位置安装应用
+endif ()
 
 # 添加 dev 模式的可执行文件构建目标
-set(CQCPPSDK_DEV_MODE ON)
-cq_add_app(app_dev src/app.cpp)
+cq_add_dev_app(src/app.cpp)
 ```
 
 :::warning 注意

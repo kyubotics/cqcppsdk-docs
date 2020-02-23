@@ -4,11 +4,27 @@ sidebar: auto
 
 # 更新日志
 
-## master
+## v0.3.0
 
 - 新增 `cq::to_string` 函数，在 `cqcppsdk/utils/string.h`，不再提供扩展的 `std::to_string` 重载
-- 支持使用 MinGW 构建 std 模式的 `app.dll`
+- 支持使用 MinGW（mingw32）构建 std 模式的 `app.dll`
+- 新增 `cq_add_std_app`、`cq_add_dev_app` CMake 函数，分别用于添加 std 模式和 dev 模式构建目标，不再建议直接使用 `cq_add_app`
+- 新增 `cq_install_std_app` CMake 函数，使用 CMake 原生的 install 功能安装 `app.dll` 和 `app.json` 到 酷Q 目录
 - 大幅调整了 Dolores 接口，在名词含义上，原来的「会话」（Session）改为「Current」，「状态」（State）改为「Session」，「条件」（Condition）改为「Matcher」，其它变更请参考最新文档
+
+由于本次更新包含 CMake 脚本的变更，可能需要适当修改你的项目 `CMakeLists.txt`，新的用法如下（旧的用法仍然可以工作，但建议尽快更新）：
+
+```cmake
+if (CQ_CAN_BUILD_STD_MODE)
+    cq_add_std_app(main.cpp utils.cpp) # 添加 std 模式的动态链接库构建目标
+    cq_install_std_app("C:/Path/To/酷Q Air")
+endif ()
+
+# 添加 dev 模式的可执行文件构建目标
+cq_add_dev_app(main.cpp utils.cpp)
+```
+
+具体请参考项目模板的 [`CMakeLists.txt`](https://github.com/cqmoe/cqcppsdk-template/blob/master/CMakeLists.txt)。
 
 ## v0.2.1
 
