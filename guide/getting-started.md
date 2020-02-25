@@ -87,13 +87,12 @@ git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 添加
 选择任一工具包（Windows 上建议「Visual Studio 生成工具 2019 - x86」，其它系统建议 GCC），之后 VS Code 会开始配置 CMake，成功后会输出「Generating done」：
 
 ```log
-[cmake] -- turn on msvc utf-8
+[cmake] -- build cqcppsdk tests: OFF
+[cmake] -- can build std mode: YES
 [cmake] -- cqcppsdk dir: C:/Users/Richard/Projects/cqmoe/cqcppsdk-template/extern/cqcppsdk
 [cmake] -- app id: com.example.demo
-[cmake] -- dev mode: OFF
 [cmake] -- add std mode dll: app
 [cmake] -- install destination: dev/com.example.demo
-[cmake] -- dev mode: ON
 [cmake] -- add dev mode executable: app_dev
 [cmake] -- Configuring done
 [cmake] -- Generating done

@@ -77,8 +77,6 @@ git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk
 ```cmake
 set(CMAKE_CXX_STANDARD 17) # 设置 C++ 标准版本为 C++17
 
-include_directories(extern/cqcppsdk/include) # 设置 SDK 的 include 目录为包含目录
-
 include(extern/cqcppsdk/cqcppsdk.cmake) # 包含 SDK 的 CMake 脚本
 
 cq_set_app_id("com.your-company.awesome-bot") # 设置 app id, 见酷Q文档
