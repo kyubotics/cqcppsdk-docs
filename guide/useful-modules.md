@@ -71,12 +71,12 @@ MessageSegment::at(12345678) // [CQ:at,qq=12345678]
 ```cpp
 Message msg1("啦啦啦，来个表情：[CQ:face,id=111]"); // 将字符串解析为 Message 对象
 msg1 += MessageSegment::at(12345678); // 拼接一个 at 消息段
-msg1.send(e.target); // 向触发 e 事件的主体发送该消息
+msg1.send(event.target); // 向触发事件的主体发送该消息
 
-const auto msg2 = Message(e.message); // 从消息事件的消息内容解析 Message 对象
+const auto msg2 = Message(event.message); // 从消息事件的消息内容解析 Message 对象
 for (const auto &seg : msg2) { // 遍历消息段
     if (seg == MessageSegment::at(12345678)) { // 发现 at 消息段
-        send_message(e.target, "@我干啥？");
+        send_message(event.target, "@我干啥？");
         break;
     }
 }

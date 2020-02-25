@@ -23,10 +23,10 @@ CoolQ C++ SDK（或称 cqcppsdk、CQCPPSDK）是为了方便使用 C++ 开发 �
 using namespace cq;
 
 CQ_INIT {
-    on_private_message([](const auto &e) {
+    on_private_message([](const auto &event) {
         try {
-            send_message(e.target, e.message);
-        } catch (ApiError &e) {
+            send_message(event.target, event.message);
+        } catch (ApiError &err) {
             logging::warning("私聊", "复读失败");
         }
     });

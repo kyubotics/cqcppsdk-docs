@@ -25,12 +25,12 @@ include_directories(extern/nlohmann_json/include) # 添加包含目录
 using json = nlohmann::json;
 
 CQ_INIT {
-    cq::on_private_message([](const auto &e) {
+    cq::on_private_message([](const auto &event) {
         json j;
         j["foo"] = "bar";
         j["baz"] = 42;
         try {
-            send_message(e.target, j.dump(4));
+            send_message(event.target, j.dump(4));
         } catch (cq::ApiError &) {
         }
     });
@@ -106,9 +106,9 @@ std::string get_content(const std::string &url) {
 }
 
 CQ_INIT {
-    cq::on_private_message([](const auto &e) {
+    cq::on_private_message([](const auto &event) {
         try {
-            send_message(e.target, get_content("http://www.httpbin.org/get"));
+            send_message(event.target, get_content("http://www.httpbin.org/get"));
         } catch (cq::ApiError &) {
         }
     });

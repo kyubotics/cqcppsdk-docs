@@ -16,8 +16,8 @@ using namespace cq;
 CQ_INIT {
     on_enable([] { logging::debug("启用", "应用已启用！"); });
 
-    on_private_message([](const auto &e) {
-        send_message(e.target, "你的消息我收到啦！");
+    on_private_message([](const auto &event) {
+        send_message(event.target, "你的消息我收到啦！");
     });
 }
 ```

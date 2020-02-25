@@ -102,10 +102,10 @@ cq_add_dev_app(src/app.cpp)
 #include <cqcppsdk/cqcppsdk.hpp>
 
 CQ_INIT {
-    cq::on_private_message([](const cq::PrivateMessageEvent &e) {
-        if (e.message == "你好") {
+    cq::on_private_message([](const cq::PrivateMessageEvent &event) {
+        if (event.message == "你好") {
             try {
-                cq::send_message(e.target, "你也好～");
+                cq::send_message(event.target, "你也好～");
             } catch (cq::ApiError &) {
             }
         }

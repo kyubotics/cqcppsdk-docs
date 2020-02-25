@@ -15,7 +15,7 @@
 可通过 `on_private_message`、`on_group_upload` 等函数将一个函数注册为特定事件的处理函数，例如：
 
 ```cpp
-on_private_message([](const PrivateMessageEvent &e) {
+on_private_message([](const PrivateMessageEvent &event) {
     // 事件处理逻辑
 });
 ```
@@ -25,7 +25,7 @@ on_private_message([](const PrivateMessageEvent &e) {
 事件处理函数应接受唯一一个参数，类型是对应事件类的常量引用。可以使用 `auto` 关键字让编译器进行自动类型推断来使代码更简洁（但可能导致编辑器无法自动补全成员变量）：
 
 ```cpp
-on_private_message([](const auto &e) {
+on_private_message([](const auto &event) {
     // 事件处理逻辑
 });
 ```
@@ -33,7 +33,7 @@ on_private_message([](const auto &e) {
 更多 `on_*` 函数，可以在 酷Q 应用管理窗口的事件列表中查看事件名称，然后去 `core/event_callback.h` 文件中找到对应的 `DEF_EVENT` 宏调用，使用 `on_` 前缀加上该宏调用的第一个参数即可。例如，群禁言事件对应的 `DEF_EVENT` 宏调用为 `DEF_EVENT(group_ban, const GroupBanEvent &)`，则该事件对应的注册函数即为 `on_group_ban`，注册事件处理函数的代码为：
 
 ```cpp
-on_group_ban([](const GroupBanEvent &e) {
+on_group_ban([](const GroupBanEvent &event) {
     // 事件处理逻辑
 });
 ```
@@ -61,8 +61,8 @@ on_group_ban([](const GroupBanEvent &e) {
 具体事件类是以「**类型+详细类型**」为粒度区分的，而一个具体的事件可能有不同的「**子类型**」。以私聊消息事件为例，所有私聊消息事件的「**类型**」都是 `PrivateMessageEvent::Type::MESSAGE`，「**详细类型**」都是 `PrivateMessageEvent::DetailType::PRIVATE`，但从好友列表发起的私聊的「**子类型**」是 `PrivateMessageEvent::SubType::FRIEND`，而从群临时会话发起的私聊的「**子类型**」是 `PrivateMessageEvent::SubType::GROUP`。若要在代码中进行判断，可以这么写：
 
 ```cpp
-if (e.sub_type == PrivateMessageEvent::SubType::GROUP) {
-    send_message(e.target, "暂时不支持群临时会话哦");
+if (event.sub_type == PrivateMessageEvent::SubType::GROUP) {
+    send_message(event.target, "暂时不支持群临时会话哦");
 }
 ```
 
@@ -85,7 +85,7 @@ if (e.sub_type == PrivateMessageEvent::SubType::GROUP) {
 | `user_id` | `int64_t` | 触发事件的用户 ID（QQ 号） |
 | `target` | `Target` | 触发事件的主体 |
 
-「触发事件的主体」是指某用户、或某群的某用户等，它和触发事件的用户 ID 的区别在于，它会额外保存群 ID 或讨论组 ID（如果有的话）。「触发事件的主体」可用于发送回复时指定目标，例如，`send_message(e.target, "你好")` API 调用可向触发事件的主体发送「你好」，如果该主体是来自一个群，则消息是发送到群中的。
+「触发事件的主体」是指某用户、或某群的某用户等，它和触发事件的用户 ID 的区别在于，它会额外保存群 ID 或讨论组 ID（如果有的话）。「触发事件的主体」可用于发送回复时指定目标，例如，`send_message(event.target, "你好")` API 调用可向触发事件的主体发送「你好」，如果该主体是来自一个群，则消息是发送到群中的。
 
 #### 继承自 `MessageEvent` 类的成员
 
@@ -110,6 +110,6 @@ auto handled = false;
 
 // ...
 
-if (handled) e.block(); // 事件已经处理好，不必再给下一个应用处理
-assert(e.blocked() == true);
+if (handled) event.block(); // 事件已经处理好，不必再给下一个应用处理
+assert(event.blocked() == true);
 ```

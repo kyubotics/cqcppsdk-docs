@@ -21,8 +21,8 @@ API 调用的位置是有限制的，初始化事件中和 `CQ_INIT` 中不可�
 ```cpp
 try {
     send_private_message(12345678, "你好！");
-} catch (ApiError &e) {
-    logging::warning("私聊", "发送失败，错误码：" + to_string(e.code));
+} catch (ApiError &err) {
+    logging::warning("私聊", "发送失败，错误码：" + to_string(err.code));
 }
 ```
 
@@ -33,22 +33,22 @@ try {
 ```cpp
 send_private_message(12345678, "你好！"); // 发送私聊消息
 
-auto msg_id = send_message(e.target, "你好呀～"); // 发送消息到触发事件的主体
+auto msg_id = send_message(event.target, "你好呀～"); // 发送消息到触发事件的主体
 delete_message(msg_id); // 撤回刚刚发送的消息
 
-delete_message(e.message_id); // 撤回群成员发送的消息
+delete_message(event.message_id); // 撤回群成员发送的消息
 
-if (e.message == "脏话") {
-    set_group_ban(e.group_id, e.user_id, 30 * 60); // 说脏话禁言 30 分钟
+if (event.message == "脏话") {
+    set_group_ban(event.group_id, event.user_id, 30 * 60); // 说脏话禁言 30 分钟
 }
 
-set_group_anonymous_ban(e.group_id, e.anonymous.flag, 30 * 60); // 禁言匿名用户 30 分钟
+set_group_anonymous_ban(event.group_id, event.anonymous.flag, 30 * 60); // 禁言匿名用户 30 分钟
 
-if (e.comment == "暗语") {
-    set_friend_request(e.flag, RequestEvent::Operation::APPROVE); // 同意好友请求
+if (event.comment == "暗语") {
+    set_friend_request(event.flag, RequestEvent::Operation::APPROVE); // 同意好友请求
 }
 
-set_group_request(e.flag, e.sub_type, RequestEvent::Operation::REJECT, "我不同意～"); // 拒绝群请求
+set_group_request(event.flag, event.sub_type, RequestEvent::Operation::REJECT, "我不同意～"); // 拒绝群请求
 
 vector<Group> groups = get_group_list(); // 获取群列表
 send_group_message(groups[0].group_id, "这是第一个群！"); // 发送群消息
