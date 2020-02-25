@@ -2,6 +2,10 @@
 
 有多种方式在本 SDK 中使用第三方库，总结起来有两种，一种是手动修改 `CMakeLists.txt` 使构建应用时同时构建第三方库，然后链接；另一种是通过包管理器预先编译好并安装在特定位置，然后在应用中直接包含头文件并链接。以下对这两种方案分别介绍两个具体方式。
 
+:::tip 提示
+本页所说的「`cq_add_app` 调用」，指 `cq_add_app`、`cq_add_std_app` 或 `cq_add_dev_app`，其中后两者是 `cq_add_app` 的封装，分别固定了 target 名为 `app` 和 `app_dev`。
+:::
+
 ## 直接导入库代码
 
 对于小型库或只有头文件（header only）的库，直接把库代码添加到项目中会比较方便。这里以 JSON 库 [nlohmann/json](https://github.com/nlohmann/json) 为例。
@@ -54,21 +58,21 @@ include_directories(extern/curl/include) # 添加包含目录
 add_definitions(-DCURL_STATICLIB) # 设置使用静态库
 ```
 
-再在 `cq_add_app` 调用之后添加：
+再在 `cq_add_app` 调用之后添加 `target_link_libraries(<TARGET_NAME> libcurl)`，例如：
 
 ```cmake
-target_link_libraries(${LIB_NAME} libcurl)
+cq_add_std_app(${SOURCE_FILES})
+target_link_libraries(app libcurl)
 ```
 
 注意，如果有多个 `cq_add_app` 调用，则对每个 target 都需要添加 `target_link_libraries`，例如：
 
 ```cmake
-cq_add_app(${LIB_NAME} ${SOURCE_FILES})
-target_link_libraries(${LIB_NAME} libcurl)
+cq_add_std_app(${SOURCE_FILES})
+target_link_libraries(app libcurl)
 
-set(CQCPPSDK_DEV_MODE ON)
-cq_add_app(${LIB_NAME}_dev ${SOURCE_FILES})
-target_link_libraries(${LIB_NAME}_dev libcurl)
+cq_add_dev_app(${SOURCE_FILES})
+target_link_libraries(app_dev libcurl)
 ```
 
 `CMakeLists.txt` 修改完成后，即可在代码中使用 curl：
@@ -162,8 +166,8 @@ set(VCPKG_LIBRARY_LINKAGE static)
 ```cmake
 find_package(unofficial-nana CONFIG REQUIRED)
 
-cq_add_app(${LIB_NAME} ${SOURCE_FILES}) # 添加 std 模式的动态链接库构建目标
-target_link_libraries(${LIB_NAME} PRIVATE unofficial::nana::nana)
+cq_add_std_app(${SOURCE_FILES}) # 添加 std 模式的动态链接库构建目标
+target_link_libraries(app PRIVATE unofficial::nana::nana)
 ```
 
 之后便可在代码中使用：
