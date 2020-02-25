@@ -5,7 +5,7 @@
 ## Echo
 
 ```cpp
-dolores_on_message(command("echo")) {
+dolores_on_message("Echo 命令", command("echo")) {
     current.send(current.command_argument());
 }
 ```
@@ -15,16 +15,16 @@ dolores_on_message(command("echo")) {
 <chat-message nickname="Bot" avatar="/bot-avatar.png">你好，世界！</chat-message>
 </panel-view>
 
-本例中，`dolores_on_message` 的参数 `command("echo")` 是一个 **Matcher**，用于表示处理程序的「进入条件」，意思是：如果一个消息是一条 `echo` 命令调用，那就运行该处理程序。
+本例中，`dolores_on_message` 的第一个参数是事件处理程序的名字，通过字符串表示，可以为任意内容，主要作用是在出错时便于定位；第二个参数 `command("echo")` 是一个 **Matcher**，用于表示处理程序的「进入条件」，意思是：如果一个消息是一条 `echo` 命令调用，那就运行该处理程序。
 
-`current` 是 `dolores_on_message` 隐式给出的一个参数，是一个 **Current 对象**，封装了**事件**和 **Session**，并且对于不同的事件类型（消息、通知、请求）提供不同的便捷函数。这里使用了 `current.send`，用于向触发该事件的主体发送消息。
+`current` 是 `dolores_on_message` 隐式给出的一个参数，是一个 **Current 对象**，封装了**事件**（`event` 成员）和 **Matcher 数据**（`matcher_data` 成员），并且对于不同的事件类型（消息、通知、请求）提供不同的便捷函数。这里使用了 `current.send`，用于向触发该事件的主体发送消息。
 
 `current.command_argument()` 可以获得 `command` Matcher 处理后的命令参数（去掉命令名的剩余消息内容）。
 
 ## 一言
 
 ```cpp
-dolores_on_message(command({"yiyan", "yy"}) || contains("一言")) {
+dolores_on_message("一言", command({"yiyan", "yy"}) || contains("一言")) {
     const auto text = http_get_string("https://v1.hitokoto.cn/?encode=text");
     current.reply(text);
     current.event.block();
@@ -47,7 +47,7 @@ dolores_on_message(command({"yiyan", "yy"}) || contains("一言")) {
 ## 更安静的一言
 
 ```cpp
-dolores_on_message(to_me(command({"yiyan", "yy"}) || contains("一言"))) {
+dolores_on_message("一言", to_me(command({"yiyan", "yy"}) || contains("一言"))) {
     const auto text = http_get_string("https://v1.hitokoto.cn/?encode=text");
     current.reply(text);
     current.event.block();
@@ -70,7 +70,7 @@ dolores_on_message(to_me(command({"yiyan", "yy"}) || contains("一言"))) {
 ## 禁言不文明群友
 
 ```cpp
-dolores_on_message(group(), unblocked(),
+dolores_on_message("禁言不文明群友", group(), unblocked(),
                    contains("脏话1") || contains("脏话2") || contains("脏话3")) {
     const auto &event = current.event_as<cq::GroupMessageEvent>();
     cq::set_group_ban(event.group_id, event.user_id, 30 * 60);
@@ -93,7 +93,8 @@ all(group(), unblocked(), (contains("脏话1") || contains("脏话2") || contain
 ## 欢迎新群友
 
 ```cpp
-dolores_on_notice(group::exclude({100100, 100101}), type<cq::GroupMemberIncreaseEvent>) {
+dolores_on_notice("欢迎新群友", group::exclude({100100, 100101}),
+                  type<cq::GroupMemberIncreaseEvent>) {
     current.reply("欢迎新群友👏");
 }
 ```
@@ -107,7 +108,7 @@ dolores_on_notice(group::exclude({100100, 100101}), type<cq::GroupMemberIncrease
 ```cpp
 constexpr int64_t SUPERUSER_ID = 10001000;
 
-dolores_on_request(user({SUPERUSER_ID}), type<cq::GroupRequestEvent>) {
+dolores_on_request("同意入群邀请", user({SUPERUSER_ID}), type<cq::GroupRequestEvent>) {
     current.approve();
 }
 ```

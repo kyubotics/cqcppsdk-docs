@@ -9,7 +9,7 @@
 这里举个例子：
 
 ```cpp
-#include <cqcppsdk/cqcppsdk.h>
+#include <cqcppsdk/cqcppsdk.hpp>
 
 using namespace cq;
 
@@ -50,7 +50,7 @@ add_subdirectory(tests)
 单元测试可以在任何平台进行，当需要使用 酷Q API 时，可以选择性地进行模拟实现，例如：
 
 ```cpp
-#include <cqcppsdk/cqcppsdk.h>
+#include <cqcppsdk/cqcppsdk.hpp>
 
 namespace cq {
     GroupMember get_group_member_info(const int64_t group_id, const int64_t user_id, const bool no_cache) {

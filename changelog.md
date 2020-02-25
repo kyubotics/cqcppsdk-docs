@@ -4,6 +4,13 @@ sidebar: auto
 
 # 更新日志
 
+## v0.4.0
+
+- 更名 `cqcppsdk/cqcppsdk.h` 为 `cqcppsdk/cqcppsdk.hpp`，旧的 `.h` 文件目前仍保留，但建议尽快更新
+- 移除 `cqcppsdk/utils/string.h`，现在字符串工具模块直接包含在 `cqcppsdk/cqcppsdk.hpp` 中
+- 优化 CMake 配置
+- 调整 Dolores 接口，将「Session」概念窄化为「Matcher 数据」
+
 ## v0.3.0
 
 - 新增 `cq::to_string` 函数，在 `cqcppsdk/utils/string.h`，不再提供扩展的 `std::to_string` 重载

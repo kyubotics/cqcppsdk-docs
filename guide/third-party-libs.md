@@ -19,7 +19,7 @@ include_directories(extern/nlohmann_json/include) # 添加包含目录
 然后即可使用：
 
 ```cpp
-#include <cqcppsdk/cqcppsdk.h>
+#include <cqcppsdk/cqcppsdk.hpp>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -78,7 +78,7 @@ target_link_libraries(app_dev libcurl)
 `CMakeLists.txt` 修改完成后，即可在代码中使用 curl：
 
 ```cpp
-#include <cqcppsdk/cqcppsdk.h>
+#include <cqcppsdk/cqcppsdk.hpp>
 #include <curl/curl.h>
 
 std::string get_content(const std::string &url) {
@@ -173,7 +173,7 @@ target_link_libraries(app PRIVATE unofficial::nana::nana)
 之后便可在代码中使用：
 
 ```cpp
-#include <cqcppsdk/cqcppsdk.h>
+#include <cqcppsdk/cqcppsdk.hpp>
 #include <nana/gui.hpp>
 
 CQ_INIT {

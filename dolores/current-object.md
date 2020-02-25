@@ -1,6 +1,6 @@
 # Current 对象
 
-Current 对象封装了事件和 Session，并根据事件类型的不同，提供不同的便捷函数。更一般地说，Current 对象封装了「**当前这次**触发事件处理程序所涉及的数据和操作」。
+Current 对象封装了事件和 Matcher 数据，并根据事件类型的不同，提供不同的便捷函数。更一般地说，Current 对象封装了「**当前这次**触发事件处理程序所涉及的数据和操作」。
 
 ## `CurrentBase<E>`
 
@@ -17,15 +17,14 @@ Current 对象封装了事件和 Session，并根据事件类型的不同，提�
   auto &message = current.event.message;
   ```
 
-#### `session` Session 对象
+#### `matcher_data` Matcher 数据
 
-- **类型**：`dolores::Session &`
+- **类型**：`dolores::StrAnyMap &`
 - **生命期**：事件处理程序运行时有效
-- **说明**：用于存放各种数据，特别地，在检查 Matcher 是否满足时，Matcher 对象可访问此对象，因此可以在自定义 Matcher 中用此对象保存数据，之后在事件处理程序中取出
+- **说明**：用于在 Matcher 中保存匹配时产生的数据，之后在事件处理程序中取出
 - **示例**：
   ```cpp
-  current.session["temp_value"] = 42;
-  auto val = current.session.get<int>("temp_value");
+  auto command_name = current.matcher_data.get<std::string_view>(command::NAME, "");
   ```
 
 ### 成员函数
@@ -72,7 +71,7 @@ Current 模板类对 `cq::MessageEvent` 的特化。
 - **返回值**：`std::message`，用户在消息中使用的命令起始符，若该消息没有满足 `command` Matcher，则返回空字符串
 - **示例**：
   ```cpp
-  dolores_on_message(command("echo", {"/", "!", "."})) {
+  dolores_on_message("echo", command("echo", {"/", "!", "."})) {
       current.command_starter(); // 可能取值为 / ! .
   }
   ```
@@ -82,7 +81,7 @@ Current 模板类对 `cq::MessageEvent` 的特化。
 - **返回值**：`std::message`，用户在消息中使用的命令名，若该消息没有满足 `command` Matcher，则返回空字符串
 - **示例**：
   ```cpp
-  dolores_on_message(command("echo")) {
+  dolores_on_message("echo", command("echo")) {
       current.command_name(); // "echo"
   }
   ```
@@ -92,7 +91,7 @@ Current 模板类对 `cq::MessageEvent` 的特化。
 - **返回值**：`std::message`，用户在消息中传入的命令参数，若该消息没有满足 `command` Matcher，则返回空字符串
 - **示例**：
   ```cpp
-  dolores_on_message(command("echo")) {
+  dolores_on_message("echo", command("echo")) {
       current.send(current.command_argument());
   }
   ```

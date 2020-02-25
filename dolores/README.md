@@ -17,7 +17,7 @@ Dolores 是在 SDK 的基本接口之上再次抽象封装的一层接口。它�
 
 using namespace dolores::matchers;
 
-dolores_on_message(command("echo")) {
+dolores_on_message("Echo 命令", command("echo")) {
     current.send(current.command_argument());
 }
 ```

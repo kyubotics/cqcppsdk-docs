@@ -94,8 +94,7 @@ msg.extract_plain_text() // 提取出 "这是一个 图文 混杂的消息"
 现在可以使用 `utils` 模块中的 `s2ws`、`ws2s` 函数来在 UTF-8 编码的字符串和宽字符串之间转换，例如：
 
 ```cpp
-#include <cqcppsdk/cqcppsdk.h>
-#include <cqcppsdk/utils/string.h>
+#include <cqcppsdk/cqcppsdk.hpp>
 #include <fstream>
 #include <iostream>
 

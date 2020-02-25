@@ -99,7 +99,7 @@ cq_add_dev_app(src/app.cpp)
 然后在 `src/app.cpp` 中使用 SDK 即可：
 
 ```cpp
-#include <cqcppsdk/cqcppsdk.h>
+#include <cqcppsdk/cqcppsdk.hpp>
 
 CQ_INIT {
     cq::on_private_message([](const cq::PrivateMessageEvent &e) {

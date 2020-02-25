@@ -66,7 +66,6 @@ module.exports = {
                         'getting-started',
                         'examples',
                         'current-object',
-                        'session',
                         'lifecycle',
                     ]
                 },

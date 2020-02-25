@@ -39,6 +39,10 @@ Dev 模式即开发模式，不依赖 Windows 和 MSVC，可在各种平台构�
 ```cmake
 set(CQCPPSDK_DEV_MODE ON)
 cq_add_app(app_dev src/demo.cpp)
+
+# 或
+
+cq_add_dev_app(src/demo.cpp)
 ```
 
 ## Std 模式
@@ -50,42 +54,8 @@ Std 模式即标准模式，必须在 Windows 环境下使用 MSVC x86 工具集
 ```cmake
 set(CQCPPSDK_DEV_MODE OFF)
 cq_add_app(app src/demo.cpp)
+
+# 或
+
+cq_add_std_app(src/demo.cpp)
 ```
-
-<!-- ## CQ 码
-
-是 酷Q 用来表示非文本消息的一种表示方法，形如 `[CQ:image,file=ABC.jpg]`。具体的格式规则，请参考 酷Q 文档的 [CQ 码](https://d.cqp.me/Pro/CQ%E7%A0%81) 和 CoolQ HTTP API 插件文档的 [CQ 码](https://cqhttp.cc/docs/#/CQCode)。
-
-## 消息段
-
-是 CoolQ HTTP API 定义的、和 CQ 码可以互相转换的一个消息表示格式，具体表示方式见 [消息格式](https://cqhttp.cc/docs/#/Message)。
-
-除了纯文本消息段之外，每一个消息段都和一个 CQ 码对应，例如下面这个消息段：
-
-```json
-{
-    "type": "face",
-    "data": {
-        "id": "14"
-    }
-}
-```
-
-对应的 CQ 码表示形式就是：
-
-```
-[CQ:face,id=14]
-```
-
-具体的，NoneBot 中使用 `MessageSegment` 类来表示消息段（继承自 aiocqhttp），例如，要创建上面这个消息段，可以使用如下代码：
-
-```python
-seg = MessageSegment(type="face", data={"id": "14"})
-```
-
-或：
-
-```python
-seg = MessageSegment.face(14)
-```
--->

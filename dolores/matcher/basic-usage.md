@@ -21,7 +21,7 @@ const auto to_me_command = [](const std::string &name) {
   return to_me(command(name));
 };
 
-dolores_on_message(to_me_command("ban"), group_admin_only) {
+dolores_on_message("Ban 命令", to_me_command("ban"), group_admin_only) {
     // ...
 }
 ```

@@ -18,7 +18,7 @@ CoolQ C++ SDK（或称 cqcppsdk、CQCPPSDK）是为了方便使用 C++ 开发 �
 ## 一瞥
 
 ```cpp
-#include <cqcppsdk/cqcppsdk.h>
+#include <cqcppsdk/cqcppsdk.hpp>
 
 using namespace cq;
 
