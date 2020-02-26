@@ -91,7 +91,7 @@ msg.extract_plain_text() // 提取出 "这是一个 图文 混杂的消息"
 
 使用本 SDK 要求全程使用 UTF-8 编码的字符串，但在进行文件操作、使用 Windows API 等时，常常需要使用 ANSI 编码（Windows 上一种随所保存的文本内容而切换具体编码方式的编码）、宽字符串（`std::wstring`）或 C 风格的宽字符串（`const wchar_t *`）。
 
-现在可以使用 `utils` 模块中的 `s2ws`、`ws2s` 函数来在 UTF-8 编码的字符串和宽字符串之间转换，例如：
+现在可以使用 `utils` 模块中的 `s2ws`、`ws2s` 函数来在 UTF-8 编码的字符串和宽字符串之间转换，使用 `ansi` 函数来将 UTF-8 字符串转换为 ANSI 编码，例如：
 
 ```cpp
 #include <cqcppsdk/cqcppsdk.hpp>
@@ -100,11 +100,15 @@ msg.extract_plain_text() // 提取出 "这是一个 图文 混杂的消息"
 
 using cq::utils::s2ws;
 using cq::utils::ws2s;
+using cq::utils::ansi;
 
 CQ_INIT {
     cq::on_enable([] {
         std::ofstream out(s2ws("日志.txt"));
+        // 或 std::ofstream out(ansi("日志.txt"));
         out << "应用已启用" << std::endl;
     });
 }
 ```
+
+这里 `ansi` 函数只在 Windows 平台上会做转换，在其它平台上则原样返回。

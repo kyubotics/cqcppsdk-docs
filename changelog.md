@@ -4,6 +4,10 @@ sidebar: auto
 
 # 更新日志
 
+## v0.4.1
+
+- 新增 `cq::utils::ansi` 函数，用于将 UTF-8 字符串转为 ANSI 编码（以调用 Windows API 或进行文件操作等）
+
 ## v0.4.0
 
 - 更名 `cqcppsdk/cqcppsdk.h` 为 `cqcppsdk/cqcppsdk.hpp`，旧的 `.h` 文件目前仍保留，但建议尽快更新
