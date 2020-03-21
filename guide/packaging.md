@@ -8,10 +8,14 @@
 
 ## 运行环境要求
 
-基于本 SDK 开发且使用 MSVC 构建的 酷Q 应用（`app.dll`）必须运行在 Windows 7 或更新版本的 Windows 操作系统（32 位或 64 位）和 Wine 上，不支持 Windows XP、Windows Vista 等老旧系统。建议在 Windows 10、Windows Server 2016 或更新版本上使用。
+### MSVC
+
+使用 MSVC 构建的 `app.dll` 必须运行在 Windows 7 或更新版本的 Windows 操作系统（32 位或 64 位）和 Wine 上，不支持 Windows XP、Windows Vista 等老旧系统。建议在 Windows 10、Windows Server 2016 或更新版本上使用。
 
 此外，在使用之前必须安装 **Microsoft Visual C++ 可再发行软件包**，可以在 [这里](https://support.microsoft.com/zh-cn/help/2977003/the-latest-supported-visual-c-downloads) 下载，**注意，请选择适用于 Visual Studio 2015、2017 和 2019 的 x86 版本**。
 
 对于较老版本的 Windows，如 Windows 7、Windows Server 2012 等，可能还需安装**通用 C 运行时更新**，~~可以在 [这里](https://support.microsoft.com/zh-cn/help/3118401/update-for-universal-c-runtime-in-windows) 根据系统版本下载~~，由于微软官方文档中的链接失效，目前只能通过打满系统更新来安装。
 
-使用 MinGW 构建的情况尚未充分测试，欢迎补充。
+### MinGW
+
+使用 MinGW 构建的 `app.dll` 理论上无需安装任何运行库即可运行在 酷Q 支持的任何系统环境下，包括 Windows 7、Windows Server 2012、Windows 10、Wine 等。

@@ -3,14 +3,14 @@
 CoolQ C++ SDK 使用 CMake 作为构建管理工具，使用现代 C++ 作为开发语言。对于这两者的新手来说，建议阅读本页的入门版开始教程，跳过高级版；而如果你是老手，可以直接跳到高级版开始教程。
 
 :::tip 提示
-无论什么操作系统都可以运行开始教程，如果你正在使用 Linux 或 macOS，不用担心，可以先用你最熟悉的系统进行体验，之后再转而使用 Windows 开发或使用 AppVeyor CI 等构建 DLL。
+无论什么操作系统都可以运行开始教程，如果你正在使用 Linux 或 macOS，不用担心，可以先用你最熟悉的系统进行体验，之后再转而使用 Windows 开发或参考 [免 Windows 开发](./windows-free.md) 来跨平台开发。
 :::
 
 ## 准备
 
 ### CMake
 
-如果你的系统中还没有安装 CMake，请先前往 [官网](https://cmake.org/download/) 下载最新版 CMake 安装，也可使用 HomeBrew、APT、Scoop、Chocolatey 等你所熟悉的包管理器安装。
+如果你的系统中还没有安装 CMake，请先前往 [官网](https://cmake.org/download/) 下载最新版 CMake 安装，也可使用 HomeBrew、APT、Pacman、Scoop、Chocolatey 等你所熟悉的包管理器安装。
 
 安装完成后，可以在命令行运行：
 
@@ -32,15 +32,9 @@ Windows 上建议使用 Visual Studio 2019 生成工具。
 
 ### 代码编辑器 / IDE
 
-建议使用 Visual Studio Code 进行开发，如果没有安装，可前往 [官网](https://code.visualstudio.com/) 下载安装，在左侧「Extensions」中可安装 Chinese (Simplified) Language Pack、C/C++、CMake、CMake Tools。
+可以使用 Visual Studio Code、Visual Studio 2019 或 CLion 等编辑器或 IDE 进行开发，其中 VS 2019 和 CLion 作为成熟的商业 IDE，已经有较好的图形界面提示和教程，后面将主要以 VS Code 为例。
 
-如果你更习惯 Visual Studio，也可以使用它，但建议使用最新版的 VS 2019。
-
-也可以使用 CLion 进行开发，它可以自动检测系统中的工具链，可以连接远程主机，功能更丰富，但它是付费的（通过学生身份可以免费申请许可证）。
-
-:::tip 提示
-鉴于 VS、CLion 等 IDE 已经有足够好的图形界面提示，网上的教程也非常丰富，下面仅以 VS Code 为例。
-:::
+如果还没有安装 VS Code，可前往 [官网](https://code.visualstudio.com/) 下载安装，在左侧「Extensions」中安装 Chinese (Simplified) Language Pack、C/C++、CMake、CMake Tools。
 
 ## 下载/克隆项目模板
 
