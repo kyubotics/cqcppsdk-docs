@@ -4,6 +4,11 @@ sidebar: auto
 
 # 更新日志
 
+## v0.4.2
+
+- 修复大小写敏感文件系统上 MinGW 包含 `Windows.h` 时出错的问题
+- 修复 Windows 上使用 MinGW 构建时的编码问题
+
 ## v0.4.1
 
 - 新增 `cq::utils::ansi` 函数，用于将 UTF-8 字符串转为 ANSI 编码（以调用 Windows API 或进行文件操作等）
