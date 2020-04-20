@@ -167,8 +167,12 @@ set(VCPKG_LIBRARY_LINKAGE static)
 find_package(unofficial-nana CONFIG REQUIRED)
 
 cq_add_std_app(${SOURCE_FILES}) # 添加 std 模式的动态链接库构建目标
-target_link_libraries(app PRIVATE unofficial::nana::nana)
+target_link_libraries(app unofficial::nana::nana)
 ```
+
+:::tip 提示
+尽管 vcpkg 安装完 nana 后，提示使用 `target_link_libraries(main PRIVATE unofficial::nana::nana)`，这里不应该添加 `PRIVATE`，因为 SDK 的 CMake 脚本中使用了不带 `PRIVATE` 的 `target_link_libraries`，这里需保持一致。
+:::
 
 之后便可在代码中使用：
 
