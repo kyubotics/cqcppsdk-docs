@@ -4,6 +4,10 @@ sidebar: auto
 
 # 更新日志
 
+## v0.4.3
+
+- 修复 `dolores::CurrentBase::event_as` 成员函数返回值没有引用的问题
+
 ## v0.4.2
 
 - 修复大小写敏感文件系统上 MinGW 包含 `Windows.h` 时出错的问题
