@@ -119,6 +119,10 @@ CQ_INIT {
 
 [Vcpkg](https://github.com/microsoft/vcpkg) 是微软推出的一个 C/C++ 包管理器，使用它安装第三方库之后，直接在 `CMakeLists.txt` 中配置链接即可。这里以 GUI 库 [nana](https://github.com/cnjinhao/nana) 为例。
 
+:::warning 注意
+Vcpkg 暂时不支持跨平台编译 Windows 版的依赖库，以下内容只适用于在 Windows 下开发的情况。
+:::
+
 首先安装 vcpkg：
 
 ```bash
@@ -127,15 +131,14 @@ git clone https://github.com/Microsoft/vcpkg.git
 cd vcpkg
 
 # 初始化
-./bootstrap-vcpkg.bat # Windows
-./bootstrap-vcpkg.sh # Linux
+./bootstrap-vcpkg.bat
 ```
 
 :::tip 提示
 理论上 vcpkg 可以安装在任何地方，但因为各项目所依赖的第三方库及其版本可能不同，全局使用一个 vcpkg 实例可能容易造成混乱，建议每个项目对应一个 vcpkg 实例。这里将把 vcpkg 安装在项目目录中，也就是 `awesome-bot/vcpkg`。
 :::
 
-`bootstrap-vcpkg` 脚本将会构建出可执行文件 `vcpkg` 或 `vcpkg.exe`。此时可运行：
+`bootstrap-vcpkg` 脚本将会构建出可执行文件 `vcpkg.exe`。此时可运行：
 
 ```bash
 ./vcpkg
