@@ -146,25 +146,15 @@ cd vcpkg
 
 来检查安装是否成功。
 
-由于 vcpkg 对不同系统、平台和链接方式，需要使用不同的 triplet（vcpkg 中定义安装配置的文件），以下只介绍 Windows 上 x86 编译、静态链接的情况。
+由于 vcpkg 对不同系统、平台和链接方式，需要使用不同的 triplet（vcpkg 中定义安装配置的文件），以下只介绍 Windows 上 x86 编译、静态库链接、动态 CRT 链接的情况。
 
-首先在安装第三方库之前，需要将 `vcpkg/triplets/x86-windows-static.cmake` 中的 `set(VCPKG_CRT_LINKAGE static)` 改为 `set(VCPKG_CRT_LINKAGE dynamic)`，最终该文件内容如下：
-
-```cmake
-set(VCPKG_TARGET_ARCHITECTURE x86)
-set(VCPKG_CRT_LINKAGE dynamic)
-set(VCPKG_LIBRARY_LINKAGE static)
-```
-
-这将会使 vcpkg 在构建第三方库时使用静态库链接、动态 CRT 链接，从而与你的 酷Q 应用保持一致，以便链接成功。如果你想使用静态 CRT 链接，则超出了本文档的讨论范围，请自行修改 `CMakeLists.txt`。
-
-接着安装 nana 库：
+安装 nana 库：
 
 ```bash
-./vcpkg install nana:x86-windows-static
+./vcpkg install nana:x86-windows-static-md
 ```
 
-成功后 `vcpkg/installed/x86-windows-static/lib` 中应有 `nana.lib` 等静态库文件。然后再修改 `CMakeLists.txt` 中 `cq_add_app` 调用附近的代码形如：
+成功后 `vcpkg/installed/x86-windows-static-md/lib` 中应有 `nana.lib` 等静态库文件。然后再修改 `CMakeLists.txt` 中 `cq_add_app` 调用附近的代码形如：
 
 ```cmake
 find_package(unofficial-nana CONFIG REQUIRED)
@@ -196,7 +186,7 @@ CQ_MENU(menu_demo_1) {
 最后，使用 CMake 构建时，需要指定 `CMAKE_TOOLCHAIN_FILE` 和 `VCPKG_TARGET_TRIPLET`：
 
 ```bash
-cmake -B build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x86-windows-static" -A Win32
+cmake -B build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET="x86-windows-static-md" -A Win32
 cmake --build build --target app
 ```
 
@@ -207,7 +197,7 @@ cmake --build build --target app
 {
     "cmake.configureSettings": {
         "CMAKE_TOOLCHAIN_FILE": "${workspaceRoot}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_TARGET_TRIPLET": "x86-windows-static"
+        "VCPKG_TARGET_TRIPLET": "x86-windows-static-md"
     }
 }
 ```
