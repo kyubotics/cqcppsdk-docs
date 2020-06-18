@@ -4,6 +4,11 @@ sidebar: auto
 
 # 更新日志
 
+## master
+
+- 修复使用 MinGW 构建 dev 模式应用的输出编码问题
+- 优化 `CQ_INIT` 宏实现
+
 ## v0.4.3
 
 - 修复 `dolores::CurrentBase::event_as` 成员函数返回值没有引用的问题
