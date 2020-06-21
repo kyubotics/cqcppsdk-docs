@@ -7,6 +7,8 @@ sidebar: auto
 ## master
 
 - 修复使用 MinGW 构建 dev 模式应用的输出编码问题
+- 修复使用 MinGW 构建时文件路径编码问题
+- 修复 `WIN32_LEAN_AND_MEAN` 的重定义警告
 - 优化 `CQ_INIT` 宏实现
 
 ## v0.4.3
