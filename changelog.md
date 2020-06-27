@@ -4,7 +4,7 @@ sidebar: auto
 
 # 更新日志
 
-## master
+## v0.4.4
 
 - 修复使用 MinGW 构建 dev 模式应用的输出编码问题
 - 修复使用 MinGW 构建时文件路径编码问题
